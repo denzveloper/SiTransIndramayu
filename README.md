@@ -11,3 +11,9 @@ Proyek 3 is Proyek 3 isnt?
 5. Make sure the permission
 6. Voila! The System is Ready! :)
 
+# Made By
+DENDY OCTAVIAN  - @denzveloper
+
+MAWAR UTARI - @mawarutari
+
+GHEBINUQI ZF. - @ghebinuqi
