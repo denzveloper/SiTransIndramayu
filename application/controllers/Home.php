@@ -12,6 +12,7 @@ class Home extends CI_Controller {
     }
 
     public function index(){
-		$this->load->view('home');
+    	$data['welcmsg'] = array('title' => $this->loginm->getsm('homepage', 'title'),  'content' => $this->loginm->getsm('homepage', 'text'), 'img' => $this->loginm->getsmimg('home_img', FALSE, 'data/img/home/', 'name'));
+		$this->load->view('home', $data);
 	}
 }
