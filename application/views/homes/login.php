@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8" />
-	<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/img/logo/index.png');?>">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" type="image/png" sizes="96x96" href="data:image;base64,<?php echo base64_encode(file_get_contents(base_url('assets/img/logo/index.png')));?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Desktop Welcome Page</title>
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
@@ -39,9 +39,9 @@
 </head>
 <body>
     <div class="content">
-    	<div class="text-center">
-    		<img class="img-fluid" width="40%" src="<?php echo base_url('assets/img/logo/index.png'); ?>" alt="..."/>
-    	</div>
+        <div class="text-center">
+            <img class="img-fluid" width="40%" src="data:image;base64,<?php echo base64_encode(file_get_contents(base_url('assets/img/logo/index.png'))); ?>" alt="..."/>
+        </div>
         <h3 class="text-center">Admin Page Login</h3>
         <h5 class="text-center">To sign in, a registered account is needed.</h5>
         <form method="POST" action="<?php echo base_url('index.php/login'); ?>" autocomplete='off'>
@@ -58,9 +58,9 @@
                     <td colspan='2' style="text-align:right"><button name="btn-login" type="submit" class="btn">Masuk</button></td>
                 </tr>
                 <tr>
-                	<td>
-                		<a href="#">Forgot Password?</a>
-                	</td>
+                    <td>
+                        <a href="#">Forgot Password?</a>
+                    </td>
                 </tr>
             </table>
         </form>
@@ -74,18 +74,18 @@
 <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>"></script>
 <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
     <script type="text/javascript">
-    	$(document).ready(function(){
+        $(document).ready(function(){
 
-        	$.notify({
-            	icon: '<?php echo $row['ico']; ?>',
-            	message: "<?php echo $row['txt']; ?>"
+            $.notify({
+                icon: '<?php echo $row['ico']; ?>',
+                message: "<?php echo $row['txt']; ?>"
 
             },{
                 type: '<?php echo $row['typ']; ?>',
                 timer: 3000
             });
 
-    	});
-	</script>
+        });
+    </script>
 <?php } } ?>
 </html>

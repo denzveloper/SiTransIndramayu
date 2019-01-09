@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 				}
 			}
 			if(!empty($msg)) $this->session->set_flashdata('info', $msg);
-			$this->load->view('login');
+			$this->load->view('homes/login');
 		}
 	}
 
