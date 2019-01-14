@@ -7,7 +7,7 @@
 	<h1>Berita Ter-Kini</h1>
 		<table border="1">
 			<tr>
-				<th>no</th>
+				<th>No</th>
 				<th>Judul</th>
 				<th>Tanggal</th>
 				<th>Konten</th>	

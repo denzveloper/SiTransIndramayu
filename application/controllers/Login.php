@@ -35,11 +35,11 @@ class Login extends CI_Controller {
 							'fnam' => $hit->namadepan,
 							'lnam' => $hit->namabelakang
 						);
-						$surel = $hit->surel;
+						$fnam = $hit->namadepan;
 					}
 					//set session userdata
 					$this->session->set_userdata($sesar);
-					$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Welcome to: </b><br><i> Admin Page \"$surel\"!</i>", 'typ' => 'success');
+					$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Hi, $fnam!</b><br><i> Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
 					redirect('dashboard/');
 
@@ -59,6 +59,8 @@ class Login extends CI_Controller {
 
     public function logout(){
 		$this->loginm->logout(TRUE);
+		$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Good bye!</b><br><i> Youre now logout.</i>", 'typ' => 'warning');
+		$this->session->set_flashdata('info', $msg);
 		redirect('login');
 	}
 }

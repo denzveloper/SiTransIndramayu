@@ -2,14 +2,14 @@
 <html>
 	<head>
 	    <meta charset="utf-8" />
-		<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/img/logo/index.png');?>">
+		<link rel="icon" type="image/png" sizes="96x96" href="data:image;base64,<?php echo base64_encode(file_get_contents(base_url('assets/img/logo/index.png')));?>">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	    <title>Dashboard Page</title>
-	    <!-- Bootstrap core CSS     -->
-	    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
-	    
-	    <!-- Animation library for notifications   -->
-	    <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet"/>
+        <!-- Bootstrap core CSS     -->
+        <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+        
+        <!-- Animation library for notifications   -->
+        <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet"/>
 	    
 	    <style>
 	        .content{
@@ -42,24 +42,26 @@
 		<p><?php echo "$_SESSION[mail] => $_SESSION[fnam] $_SESSION[lnam]"; ?></p>
 		<a href="<?php echo base_url('index.php/login/logout');?>">Keluar</a>
 	</body>
-	<!--   Core JS Files   -->
-	<script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
-	<!--  Notifications Plugin    -->
-	<script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>"></script>
-	<?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
-	    <script type="text/javascript">
-	    	$(document).ready(function(){
+    <!--   Core JS Files   -->
+    <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+    <!--  Notifications Plugin    -->
+    <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
 
-	        	$.notify({
-	            	icon: '<?php echo $row['ico']; ?>',
-	            	message: "<?php echo $row['txt']; ?>"
+    <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
+        <script type="text/javascript">
+            $(document).ready(function(){
 
-	            },{
-	                type: '<?php echo $row['typ']; ?>',
-	                timer: 3000
-	            });
+                $.notify({
+                    icon: '<?php echo $row['ico']; ?>',
+                    message: "<?php echo $row['txt']; ?>"
 
-	    	});
-		</script>
-	<?php } } ?>
+                },{
+                    type: '<?php echo $row['typ']; ?>',
+                    timer: 3000
+                });
+
+            });
+        </script>
+    <?php } } ?>
 </html>
