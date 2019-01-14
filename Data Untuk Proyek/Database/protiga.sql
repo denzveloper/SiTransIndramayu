@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2019 at 08:14 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Waktu pembuatan: 14 Jan 2019 pada 17.20
+-- Versi server: 10.1.37-MariaDB
+-- Versi PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_kk`
+-- Struktur dari tabel `data_kk`
 --
 
 CREATE TABLE `data_kk` (
@@ -47,7 +47,7 @@ CREATE TABLE `data_kk` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_tanggung`
+-- Struktur dari tabel `data_tanggung`
 --
 
 CREATE TABLE `data_tanggung` (
@@ -66,7 +66,7 @@ CREATE TABLE `data_tanggung` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `homepage`
+-- Struktur dari tabel `homepage`
 --
 
 CREATE TABLE `homepage` (
@@ -74,21 +74,38 @@ CREATE TABLE `homepage` (
   `text` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data untuk tabel `homepage`
+--
+
+INSERT INTO `homepage` (`title`, `text`) VALUES
+('\r\nDepartment of Manpower and Transmigration of Indramayu Regency', 'Hello World! Anda Pesan Apa?');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `home_img`
+-- Struktur dari tabel `home_img`
 --
 
 CREATE TABLE `home_img` (
   `id` int(12) NOT NULL,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL
+  `name` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT 'default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data untuk tabel `home_img`
+--
+
+INSERT INTO `home_img` (`id`, `name`) VALUES
+(1, '1.png'),
+(2, '2.png'),
+(3, '3.png'),
+(4, '4.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kabar`
+-- Struktur dari tabel `kabar`
 --
 
 CREATE TABLE `kabar` (
@@ -97,13 +114,22 @@ CREATE TABLE `kabar` (
   `timedate` datetime NOT NULL,
   `pengguna` varchar(128) COLLATE utf8_bin NOT NULL,
   `konten` text COLLATE utf8_bin NOT NULL,
-  `sampul` varchar(128) COLLATE utf8_bin NOT NULL
+  `sampul` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT 'default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data untuk tabel `kabar`
+--
+
+INSERT INTO `kabar` (`id`, `judul`, `timedate`, `pengguna`, `konten`, `sampul`) VALUES
+(1, 'Teroret', '2019-01-02 04:33:28', 'root@root.com', 'Blablablabla', 'default.png'),
+(2, 'msmsms', '2019-01-01 00:00:00', 'root@root.com', 'kskhakofhkjdhfkjsdhkhsdk', 'default.png'),
+(3, 'agagaga', '2019-01-02 00:00:00', 'root@root.com', 'kdsjkdsksd', 'default.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `log_data`
+-- Struktur dari tabel `log_data`
 --
 
 CREATE TABLE `log_data` (
@@ -115,7 +141,7 @@ CREATE TABLE `log_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Struktur dari tabel `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -126,7 +152,7 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `pengguna`
+-- Dumping data untuk tabel `pengguna`
 --
 
 INSERT INTO `pengguna` (`surel`, `namadepan`, `namabelakang`, `sandi`) VALUES
@@ -135,7 +161,7 @@ INSERT INTO `pengguna` (`surel`, `namadepan`, `namabelakang`, `sandi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_session`
+-- Struktur dari tabel `tbl_session`
 --
 
 CREATE TABLE `tbl_session` (
@@ -146,91 +172,94 @@ CREATE TABLE `tbl_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `tbl_session`
+-- Dumping data untuk tabel `tbl_session`
 --
 
 INSERT INTO `tbl_session` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('jtcju63rviri3m66f22iraio4aet6lsl', '::1', 1546934739, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534363933343639363b);
+('abrq8sl86nqhhpuinrknisvn8209df0k', '::1', 1547147852, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373134373834343b),
+('18nakal3miko2ch1vr1m15k9ajuqb7dr', '::1', 1547191315, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373139313134353b),
+('brse62ffpt189tjcg2eucs5kfo7oukoc', '::1', 1547462641, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373436323634313b),
+('ei10il1jngadrh9uspjmn791s34ham7p', '127.0.0.1', 1547465012, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373436343733353b);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `data_kk`
+-- Indeks untuk tabel `data_kk`
 --
 ALTER TABLE `data_kk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `data_tanggung`
+-- Indeks untuk tabel `data_tanggung`
 --
 ALTER TABLE `data_tanggung`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_kk` (`id_kk`);
 
 --
--- Indexes for table `home_img`
+-- Indeks untuk tabel `home_img`
 --
 ALTER TABLE `home_img`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kabar`
+-- Indeks untuk tabel `kabar`
 --
 ALTER TABLE `kabar`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pengguna` (`pengguna`);
 
 --
--- Indexes for table `log_data`
+-- Indeks untuk tabel `log_data`
 --
 ALTER TABLE `log_data`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_kk` (`id_kk`);
 
 --
--- Indexes for table `pengguna`
+-- Indeks untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`surel`);
 
 --
--- Indexes for table `tbl_session`
+-- Indeks untuk tabel `tbl_session`
 --
 ALTER TABLE `tbl_session`
   ADD KEY `timestamp` (`timestamp`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `data_kk`
+-- AUTO_INCREMENT untuk tabel `data_kk`
 --
 ALTER TABLE `data_kk`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `data_tanggung`
+-- AUTO_INCREMENT untuk tabel `data_tanggung`
 --
 ALTER TABLE `data_tanggung`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `home_img`
+-- AUTO_INCREMENT untuk tabel `home_img`
 --
 ALTER TABLE `home_img`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `kabar`
+-- AUTO_INCREMENT untuk tabel `kabar`
 --
 ALTER TABLE `kabar`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `log_data`
+-- AUTO_INCREMENT untuk tabel `log_data`
 --
 ALTER TABLE `log_data`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
