@@ -8,6 +8,6 @@ class Register extends CI_Controller {
     }
 
     public function index(){
-		$this->load->view('homes/home');
+		$this->load->view('register/first');
 	}
 }

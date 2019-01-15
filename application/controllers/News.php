@@ -18,9 +18,15 @@ class News extends CI_Controller {
         $config['display_pages'] = FALSE;
         $config['first_link'] = FALSE;
         $config['last_link'] = FALSE;
+        $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
-        $data['user'] = $this->datam->data($config['per_page'], $from);
+        $data['news'] = $this->datam->data($config['per_page'], $from);
 		$this->load->view('homes/news', $data);
 	}
 }

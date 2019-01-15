@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>News</title>
+		<title>Berita-In Transmigrasi</title>
 	</head>
 	<body>
+	<?php //$this->uri->segment('3'); ?>
 	<h1>Berita Ter-Kini</h1>
 		<table border="1">
 			<tr>
-				<th>No</th>
 				<th>Judul</th>
 				<th>Tanggal</th>
 				<th>Konten</th>	
 				<th>Image</th>	
 			</tr>
-			<?php 
-			$no = $this->uri->segment('3') + 1;
-			if($user){ foreach($user as $u){ 
+			<?php
+			if($news){foreach($news as $u){ 
 			?>
 			<tr>
-				<td><?php echo $no++; ?></td>
 				<td><?php echo $u['judul']; ?></td>
 				<td><?php echo $u['timedate']; ?></td>
 				<td><?php echo $u['konten']; ?></td>
