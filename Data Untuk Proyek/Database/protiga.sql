@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 14 Jan 2019 pada 17.20
+-- Waktu pembuatan: 15 Jan 2019 pada 16.54
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -179,7 +179,8 @@ INSERT INTO `tbl_session` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('abrq8sl86nqhhpuinrknisvn8209df0k', '::1', 1547147852, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373134373834343b),
 ('18nakal3miko2ch1vr1m15k9ajuqb7dr', '::1', 1547191315, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373139313134353b),
 ('brse62ffpt189tjcg2eucs5kfo7oukoc', '::1', 1547462641, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373436323634313b),
-('ei10il1jngadrh9uspjmn791s34ham7p', '127.0.0.1', 1547465012, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373436343733353b);
+('ei10il1jngadrh9uspjmn791s34ham7p', '127.0.0.1', 1547465012, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373436343733353b),
+('rvllog6i8i003qp7tenmdvc54lfjt025', '::1', 1547568151, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534373536383135313b);
 
 --
 -- Indexes for dumped tables
@@ -263,6 +264,28 @@ ALTER TABLE `kabar`
 --
 ALTER TABLE `log_data`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `data_tanggung`
+--
+ALTER TABLE `data_tanggung`
+  ADD CONSTRAINT `data_tanggung_ibfk_1` FOREIGN KEY (`id_kk`) REFERENCES `data_kk` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `kabar`
+--
+ALTER TABLE `kabar`
+  ADD CONSTRAINT `kabar_ibfk_1` FOREIGN KEY (`pengguna`) REFERENCES `pengguna` (`surel`);
+
+--
+-- Ketidakleluasaan untuk tabel `log_data`
+--
+ALTER TABLE `log_data`
+  ADD CONSTRAINT `log_data_ibfk_1` FOREIGN KEY (`id_kk`) REFERENCES `data_kk` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
