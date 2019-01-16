@@ -54,7 +54,8 @@
 
                 $.notify({
                     icon: "<?php echo $row['ico']; ?>",
-                    message: "<?php echo $row['txt']; ?>"
+                    title: "<strong><?php echo $row['tit']; ?></strong>",
+                    message: "<br><?php echo $row['txt']; ?>"
 
                 },{
                     type: "<?php echo $row['typ']; ?>",

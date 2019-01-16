@@ -5,8 +5,6 @@ class Login extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        //Must to Load!
-        $this->load->library('session');
         //load model loginm
         $this->load->model('loginm');
     }
@@ -33,17 +31,16 @@ class Login extends CI_Controller {
 						$fnam = $hit->namadepan;
 					}
 					$this->session->set_userdata($sesar);
-					$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Hi, $fnam!</b><br><i> Welcome to Admin Page.</i>", 'typ' => 'success');
+					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $fnam!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
 					redirect('dashboard/');
 
 				}else{
-					$this->session->set_flashdata('login', FALSE);
-					$msg[] = array('ico' => 'ti-close', 'txt' => '<b>Warning: </b><br><i>Mail or Password is Wrong!</i>', 'typ' => 'danger');
+					$msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning:", 'txt' => '<i>Mail or Password is Wrong!</i>', 'typ' => 'danger');
 				}
 			}else{
 				if(validation_errors()){
-					$msg[] = array('ico' => 'ti-info', 'txt' => '<b>Warning: </b><br><i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
+					$msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning:", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
 				}
 			}
 			if(!empty($msg)) $this->session->set_flashdata('info', $msg);
@@ -52,9 +49,11 @@ class Login extends CI_Controller {
 	}
 
     public function logout(){
-		$this->loginm->logout(TRUE);
-		$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Good bye!</b><br><i> Youre now logout.</i>", 'typ' => 'warning');
+		$name = $_SESSION['fnam'];
+		$this->loginm->logout();
+		$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'warning');
 		$this->session->set_flashdata('info', $msg);
+		print_r($this->session->flashdata('info'));
 		redirect('login');
 	}
 }

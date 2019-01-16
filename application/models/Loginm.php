@@ -25,16 +25,12 @@ class Loginm extends CI_Model{
         return $this->session->userdata('mail');
     }
 
-    function logout($f1 = FALSE){
+    function logout(){
         //logout
 		$logdt = array(
             'logged_in', 'mail', 'fnam', 'lnam'
         );
         $this->session->unset_userdata($logdt);
-        //if logout session
-        if($f1 == TRUE){
-            $this->session->sess_destroy();
-        }
     }
 
     function getail($f1, $f2, $f3){
