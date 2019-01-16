@@ -5,7 +5,14 @@
 	</head>
 	<body>
 	<?php //$this->uri->segment('3'); ?>
-	<h1>Berita Ter-Kini</h1>
+	<h1>MANPOWER AND TRANSMIGRATION REGION INDRAMAYU</h1>
+    <a href="<?php echo base_url('index.php/login'); ?>">Login Landing Page</a>
+    <br>
+    <a href="<?php echo base_url('index.php/home'); ?>">Home</a>
+    <a href="<?php echo base_url('index.php/register'); ?>">Register</a>
+    <a href="#">News</a>
+    <br>
+	<h2>Berita Ter-Kini</h2>
 		<table border="1">
 			<tr>
 				<th>Judul</th>

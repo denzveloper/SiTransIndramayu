@@ -73,16 +73,17 @@
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
+    <?php print_r($this->session->flashdata('info'));?>
     <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
         <script type="text/javascript">
             $(document).ready(function(){
 
                 $.notify({
-                    icon: '<?php echo $row['ico']; ?>',
+                    icon: "<?php echo $row['ico']; ?>",
                     message: "<?php echo $row['txt']; ?>"
 
                 },{
-                    type: '<?php echo $row['typ']; ?>',
+                    type: "<?php echo $row['typ']; ?>",
                     timer: 3000
                 });
 

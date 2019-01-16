@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 
     public function logout(){
 		$this->loginm->logout(TRUE);
-		$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Good bye!</b><br><i> Youre now logout.</i>", 'typ' => 'warning');
+		$msg[] = array('ico' => 'ti-check', 'txt' => "<b>Good bye!</b><br><i> You now log out!</i>", 'typ' => 'warning');
 		$this->session->set_flashdata('info', $msg);
 		redirect('login');
 	}

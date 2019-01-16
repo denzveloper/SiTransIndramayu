@@ -53,11 +53,11 @@
             $(document).ready(function(){
 
                 $.notify({
-                    icon: '<?php echo $row['ico']; ?>',
+                    icon: "<?php echo $row['ico']; ?>",
                     message: "<?php echo $row['txt']; ?>"
 
                 },{
-                    type: '<?php echo $row['typ']; ?>',
+                    type: "<?php echo $row['typ']; ?>",
                     timer: 3000
                 });
 
