@@ -5,7 +5,7 @@ class Image {
     function compress($source){
         $info = getimagesize($source);
         $destination = "cache/".rand(10000,99999)."jpeg";
-        $quality = 20;
+        $quality = 70;
 
         if ($info['mime'] == 'image/jpeg') 
             $image = imagecreatefromjpeg($source);

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+	<meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<head>
 		<title>Berita-In Transmigrasi</title>
 	</head>
@@ -27,7 +30,7 @@
 				<td><?php echo $u['judul']; ?></td>
 				<td><?php echo $u['timedate']; ?></td>
 				<td><?php echo $u['konten']; ?></td>
-				<td><img src="data:image;base64,<?php echo base64_encode(file_get_contents($u['image'])); ?>"></td>
+				<td><img src="<?php echo $this->image->show($u['image']); ?>"></td>
 			</tr>
 			<?php }}?>
 		</table>

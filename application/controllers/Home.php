@@ -6,8 +6,7 @@ class Home extends CI_Controller {
     public function __construct(){
         parent::__construct();
         //load model loginm
-        $this->load->model('loginm');
-        $this->load->library("image");
+        $this->load->model("loginm");
     }
 
     public function index(){
