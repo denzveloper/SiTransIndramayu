@@ -40,7 +40,7 @@
     <body>
         <div class="content">
             <div class="text-center">
-                <img class="img-fluid" width="40%" src="data:image;base64,<?php echo base64_encode(file_get_contents(base_url('assets/img/logo/index.png'))); ?>" alt="..."/>
+                <img class="img-fluid" width="40%" src="<?php echo $this->image->show(); ?>" alt="..."/>
             </div>
             <h3 class="text-center">Admin Page Login</h3>
             <h5 class="text-center">To sign in, a registered account is needed.</h5>

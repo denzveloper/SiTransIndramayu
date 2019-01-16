@@ -17,7 +17,7 @@
         <br>
         <h3><?php echo $welcmsg['title']; ?></h3>
         <?php foreach($welcmsg['img'] as $img){ ?>
-            <img src="data:image;base64,<?php echo base64_encode(file_get_contents($img)); ?>">
+            <img src="<?php echo $this->image->show("$img"); ?>">
         <?php } ?>
         <p><?php echo $welcmsg['content']; ?></p>
     </body>

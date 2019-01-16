@@ -70,10 +70,10 @@ class Loginm extends CI_Model{
         $get = $this->db->get();
         if($get !== FALSE && $get->num_rows() > 0){
             foreach($get->result() as $hit){
-            $got[] = base_url().$f3.$hit->$f4;
+            $got[] = $f3.$hit->$f4;
             }
         }else{
-            $got = base_url()."data/img/default.png";
+            $got = "default.png";
         }
         return $got;
     }
