@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Image {
     function compress($source){
         $info = getimagesize($source);
-        $destination = "cache/".rand(10000,99999)."jpeg";
         $quality = 70;
 
         if ($info['mime'] == 'image/jpeg') 
@@ -16,18 +15,23 @@ class Image {
         elseif ($info['mime'] == 'image/png') 
             $image = imagecreatefrompng($source);
     
-        imagejpeg($image, $destination, $quality);
-    
-        return $destination;
+        ob_start();
+
+        imagejpeg($image, NULL, $quality);
+
+        $imagedata = ob_get_contents();
+
+        ob_end_clean();
+
+        return base64_encode($imagedata);
     }
 
     function show($url = "assets/img/logo/index.png"){
         $img = base64_encode(file_get_contents(base_url($url)));
         if($url != "assets/img/logo/index.png"){
             //$url = "data/img/".$url;
-            $imgc = $this->compress($url);
-            $img = base64_encode(file_get_contents(base_url($imgc)));
-            unlink($imgc);
+            $img = $this->compress($url);
+            //unlink($imgc);
         }
         return "data:image;base64,$img";
     }
