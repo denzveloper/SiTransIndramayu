@@ -9,7 +9,7 @@
 	<body>
 	<?php //$this->uri->segment('3'); ?>
 	<h1>MANPOWER AND TRANSMIGRATION REGION INDRAMAYU</h1>
-    <a href="<?php echo base_url('index.php/login'); ?>">Login Landing Page</a>
+    <a href="<?php echo base_url('index.php/login'); ?>">Login Admin</a>
     <br>
     <a href="<?php echo base_url('index.php/home'); ?>">Home</a>
     <a href="<?php echo base_url('index.php/register'); ?>">Register</a>
