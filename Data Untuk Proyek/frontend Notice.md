@@ -66,14 +66,16 @@ timer: 3000
  3. Pembagian Direktori
  - Frontend Register dan Home
 > ./application/views/homes
-
+「Homepage」
+> ./application/view/register
+「Register new family」
 
  - Frontend dashboard
  Direktori untuk frontend dashboard berada di:
 > ./application/views/login
-
+「Dashboard」
 > ./application/views/forget
-
+「Forget Password」
 > ./application/veiws/homes
 「Login page」
 
