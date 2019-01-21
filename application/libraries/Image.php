@@ -23,18 +23,20 @@ class Image {
 
         ob_end_clean();
 
-        return base64_encode($imagedata);
+        return $imagedata;
     }
 
     function show($url = "assets/img/logo/index.png"){
-        $img = base64_encode(file_get_contents(base_url($url)));
-        if($url != "assets/img/logo/index.png"){
+        if($url != "assets/img/logo/index.png" && file_exists($url)){
 
-            //Tambah gambar "No Image" jika gak ada berkas gambar yang dituju
             //Tambah agar tidak sensitif dengan huruf Kapital dan kecil
-
-            $img = $this->compress($url);
+                $img = $this->compress($url);
+        }elseif(!file_exists($url)){
+            $img = file_get_contents(base_url("/data/img/default.png"));
+        }else{
+            $img = file_get_contents(base_url($url));
         }
+        $img = base64_encode($img);
         return "data:image;base64,$img";
     }
 }
