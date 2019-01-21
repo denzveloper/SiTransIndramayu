@@ -41,7 +41,7 @@ class Safe {
 		else if(getenv('HTTP_FORWARDED_FOR'))
 			$ipaddress = getenv('HTTP_FORWARDED_FOR');
 		else if(getenv('HTTP_FORWARDED'))
-		   $ipaddress = getenv('HTTP_FORWARDED');
+			$ipaddress = getenv('HTTP_FORWARDED');
 		else if(getenv('REMOTE_ADDR'))
 			$ipaddress = getenv('REMOTE_ADDR');
 		else

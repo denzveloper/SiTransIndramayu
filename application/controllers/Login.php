@@ -33,7 +33,7 @@ class Login extends CI_Controller {
 					$this->session->set_userdata($sesar);
 					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $fnam!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
-					redirect('dashboard/');
+					redirect('user/dashboard/');
 
 				}else{
 					$msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning:", 'txt' => '<i>Mail or Password is Wrong!</i>', 'typ' => 'danger');

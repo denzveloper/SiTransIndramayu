@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Image {
     function compress($source){
         $info = getimagesize($source);
-        $quality = 70;
+        $quality = 75;
 
         if ($info['mime'] == 'image/jpeg') 
             $image = imagecreatefromjpeg($source);
@@ -14,13 +14,11 @@ class Image {
     
         elseif ($info['mime'] == 'image/png') 
             $image = imagecreatefrompng($source);
-    
+
+
         ob_start();
-
         imagejpeg($image, NULL, $quality);
-
         $imagedata = ob_get_contents();
-
         ob_end_clean();
 
         return $imagedata;
@@ -28,11 +26,10 @@ class Image {
 
     function show($url = "assets/img/logo/index.png"){
         if($url != "assets/img/logo/index.png" && file_exists($url)){
-
             //Tambah agar tidak sensitif dengan huruf Kapital dan kecil
                 $img = $this->compress($url);
         }elseif(!file_exists($url)){
-            $img = file_get_contents(base_url("/data/img/default.png"));
+            $img = file_get_contents(base_url("/assets/img/default.png"));
         }else{
             $img = file_get_contents(base_url($url));
         }
