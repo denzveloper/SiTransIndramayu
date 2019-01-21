@@ -5,7 +5,7 @@ class Datam extends CI_Model{
 		$result = $this->db->get('kabar', $number, $offset)->result();
 		if($result != null){
 			foreach ($result as $rst) {
-				$img = base_url('data/img/kabar/').$rst->sampul;
+				$img = 'data/img/kabar/'.$rst->sampul;
 				$get[] = array('judul' => $rst->judul, 'timedate' => $rst->timedate, 'konten' => $rst->konten, 'image' => $img);
 			}
 		}else{

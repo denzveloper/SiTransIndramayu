@@ -25,4 +25,4 @@
 **GHEBINUQI ZF.** - *[@ghebinuqi](https://github.com/ghebinuqi)*
 
 
-![DENZVELOPER - DzEN](https://avatars2.githubusercontent.com/u/26875850?s=40&v=4)  ![Mawar Utari](https://avatars3.githubusercontent.com/u/45805703?s=60&v=4)
+![DENZVELOPER - DzEN](https://www.gravatar.com/avatar/4013c583d3f3e4381cc0d384c8c70a51?s=150)  ![Mawar Utari](https://avatars3.githubusercontent.com/u/45805703?s=150) ![GHEBINUQI ZF](https://avatars0.githubusercontent.com/u/33284073?s=50)

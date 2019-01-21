@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" sizes="96x96" href="data:image;base64,<?php echo base64_encode(file_get_contents(base_url('assets/img/logo/index.png')));?>">
+        <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Desktop Welcome Page</title>
         <!-- Bootstrap core CSS     -->

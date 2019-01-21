@@ -7,7 +7,7 @@ class Telolet extends CI_Controller {
         parent::__construct();
         //Must to Load!
         //load model loginm
-        $this->load->model('loginm');
+        $this->load->model("loginm");
     }
 
     public function index(){
