@@ -29,6 +29,7 @@ Tutorial silahkan tanya pada Owner repositori atau Searching google.「Saya reko
  - Skrip untuk menampilkan notifikasi
 ```
 ....
+
 <?php  if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
 
 <script  type="text/javascript">
@@ -70,7 +71,11 @@ timer: 3000
  - Frontend dashboard
  Direktori untuk frontend dashboard berada di:
 > ./application/views/login
+
 > ./application/views/forget
+
+> ./application/veiws/homes
+「Login page」
 
 4. Simpan
 Untuk penyimpanan silahkan simpan ke direktori masing-masing dan harus diuji coba terlebih dahulu di-perambahan web.
