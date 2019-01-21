@@ -29,9 +29,11 @@ class Image {
     function show($url = "assets/img/logo/index.png"){
         $img = base64_encode(file_get_contents(base_url($url)));
         if($url != "assets/img/logo/index.png"){
-            //$url = "data/img/".$url;
+
+            //Tambah gambar "No Image" jika gak ada berkas gambar yang dituju
+            //Tambah agar tidak sensitif dengan huruf Kapital dan kecil
+
             $img = $this->compress($url);
-            //unlink($imgc);
         }
         return "data:image;base64,$img";
     }
