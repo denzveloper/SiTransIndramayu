@@ -23,10 +23,14 @@ class Loginm extends CI_Model{
     //Function check access
     function chksess(){
         $ret = $this->session->userdata('mail');
-        if(!$ret){
-            $this->session->set_flashdata('info', array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Sorry!", 'txt' => '<i>You are not login</i>', 'typ' => 'danger'));
+        if(!$ret && !$this->session->flashdata('info')){
+            $this->session->set_flashdata('info', array(array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Sorry!", 'txt' => '<i>You are not login</i>', 'typ' => 'danger')));
         }
         return $ret;
+    }
+
+    function chksessl(){
+        return $this->session->userdata('mail');
     }
 
     //Delete Somedata

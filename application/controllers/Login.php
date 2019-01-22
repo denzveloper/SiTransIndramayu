@@ -10,7 +10,7 @@ class Login extends CI_Controller {
     }
 
     public function index(){
-    	if($this->loginm->chksess()){
+    	if($this->loginm->chksessl()){
 			redirect("dashboard");
 		}else{
 			$this->form_validation->set_rules('mail', 'Email', 'required|valid_email|trim|max_length[128]');
@@ -33,8 +33,6 @@ class Login extends CI_Controller {
 					$this->session->set_userdata($sesar);
 					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $fnam!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
-					var_dump($msg);
-					exit;
 					redirect('dashboard');
 
 				}else{
@@ -51,10 +49,14 @@ class Login extends CI_Controller {
 	}
 
     public function logout(){
-		$name = $_SESSION['fnam'];
-		$this->loginm->logout();
-		$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'info');
-		$this->session->set_flashdata('info', $msg);
-		redirect('login');
+		if(!$this->loginm->chksess()){
+			redirect("login");
+		}else{
+			$name = $_SESSION['fnam'];
+			$this->loginm->logout();
+			$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'info');
+			$this->session->set_flashdata('info', $msg);
+			redirect('login');
+		}
 	}
 }

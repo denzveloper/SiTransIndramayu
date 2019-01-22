@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
 
     public function index(){
     	if(!$this->loginm->chksess()){
+            $this->session->set_flashdata('info', array(array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Sorry!", 'txt' => '<i>You are not login</i>', 'typ' => 'danger')));
 			redirect("login");
 		}else{
 			$this->load->view('login/dashboard');

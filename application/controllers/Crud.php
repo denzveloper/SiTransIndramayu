@@ -27,11 +27,11 @@ class Crud extends CI_Controller {
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-            echo $tod = $this->input->get("todo", TRUE);
+            $tod = $this->input->get("todo", TRUE);
 
             if($tod = "delete"){
-                echo $id = $this->input->get("id", TRUE);
-                echo $name = $this->loginm->getail('home_img', array('id' => $id), 'name');
+                $id = $this->input->get("id", TRUE);
+                $name = $this->loginm->getail('home_img', array('id' => $id), 'name');
                 //exit;
                 if(isset($id) && !empty($name)){
                     if($name != "default.png"){
