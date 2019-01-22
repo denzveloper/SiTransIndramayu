@@ -1,6 +1,6 @@
-# PANDUAN UNTUK MEMBUAT FRONTEND
+# PANDUAN singkat UNTUK MEMBUAT FRONTEND
 1. Pengambilan data
-Silahkan clone data menggunakan git dan desktop client git(tortuise git, git extension, gitahead, dll) dan simpanlah pada direktori "htdocs" pada xampp atau direktori lain.
+Silahkan clone data menggunakan git dan git desktop client(tortuise git, git extension, gitahead, dll) dan simpanlah pada direktori "htdocs" pada xampp atau direktori lain.
 Tutorial silahkan tanya pada Owner repositori atau Searching google.「Saya rekomendasikan menggunakan GitAhead karena ada dukungan terhadap login menggunakan akun」
 
 3.  Mohon jangan Hapus
@@ -84,6 +84,6 @@ timer: 3000
 
 4. Simpan
 Untuk penyimpanan silahkan simpan ke direktori masing-masing dan harus diuji coba terlebih dahulu di-perambahan web.
-Setelah uji coba silahkan "Commit" dan "Push" ke repositori.
+Setelah uji coba silahkan "Commit" dan "Push" ke repositori menggunakan aplikasi git desktop client.
 
 > Jangan lupa gunakan "BRANCH" masing-masing!!! 「Tutorial? Seperti diatas.. :)」

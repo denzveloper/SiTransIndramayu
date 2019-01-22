@@ -9,6 +9,9 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <input type="email">
+<form method="POST" action="<?php echo base_url('index.php/login'); ?>" autocomplete='off'>
+<input type="email" name="mail" placeholder="Email" required></td>
+<button name="btn-login" type="submit" class="btn">Send Mail</button>
+</form>
 </body>
-</html>>
+</html>

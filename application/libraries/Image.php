@@ -17,6 +17,7 @@ class Image {
 
 
         ob_start();
+        imageinterlace($image, true);
         imagejpeg($image, NULL, $quality);
         $imagedata = ob_get_contents();
         ob_end_clean();

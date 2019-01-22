@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="#">Forgot Password?</a>
+                            <a href="<?php echo base_url('index.php/forget'); ?>">Forgot Password?</a>
                         </td>
                     </tr>
                 </table>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Databaseu extends CI_Controller {
+class Forget extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
@@ -12,6 +12,6 @@ class Databaseu extends CI_Controller {
     }
 
     public function index(){
-		redirect("user/dashboard");
+		$this->load->view('forget/ask');
 	}
 }
