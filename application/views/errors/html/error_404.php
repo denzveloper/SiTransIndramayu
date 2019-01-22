@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$link = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
 ?>
 <!DOCTYPE html>
 <html lang=en>
@@ -15,5 +15,5 @@ $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "htt
     a img{border:0}
   </style>
   <h2><b>ERROR 404.</b> <ins>That’s is Not Found.</ins></h2>
-  <p>The requested URL <code>"<i><?php echo  $link; ?></i>x"</code> was not found on this server.  <ins>That’s all we know.</ins></p>
+  <p>The requested URL <code>"<i><?php echo  $link; ?></i>"</code> was not found on this server.  <ins>That’s all we know.</ins></p>
 </html>

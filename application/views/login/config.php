@@ -38,15 +38,28 @@
 	    </style>
 	</head>
 	<body>
-		<h1>Dashboard</h1>
+		<h1>Configure</h1>
 		<p><?php echo "$_SESSION[mail] => $_SESSION[fnam] $_SESSION[lnam]"; ?></p>
 		<a href="<?php echo base_url('index.php/login/logout');?>">Keluar</a>
 		<hr>
-		<a href="#">Home</a>
+		<a href="<?php echo base_url('index.php/dashboard'); ?>">Home</a>
 		<a href="<?php echo base_url('index.php/dashboard/artikel'); ?>">Artikel</a>
 		<a href="<?php echo base_url('index.php/dashboard/data'); ?>">Data Transmmigrasi</a>
 		<a href="<?php echo base_url('index.php/dashboard/profil'); ?>">Akun</a>
-		<a href="<?php echo base_url('index.php/dashboard/conf'); ?>">Configure</a>
+		<a href="#">Configure</a>
+        <hr>
+        <h3>Tampilan Muka</h3>
+        <form action="<?php echo base_url('index.php/crud/config');?>" method="POST" enctype="multipart/form-data">
+            <input name="title" value="<?php echo $user['title']; ?>" type="text" placeholder="Title Page" required><br>
+            <textarea rows="30" placeholder="Artikel...." name="artikel" required><?php echo $user['content']; ?></textarea>
+            <?php if(!empty($user['img'])){foreach($user['img'] as $img){ ?>
+				<?php echo $img['id']; ?>
+                <img src="<?php echo $this->image->show($img['img']); ?>">
+				<a href="<?php echo base_url('index.php/crud/photohome').$img['id']."&todo=delete";?>"><button class="btn btn-sm btn-danger btn-icon"><i class="fa fa-trash"></i></button></a>
+				<br>
+            <?php }}else{ echo "NO IMAGE YET"; } ?>
+            <button type="submit">Simpan</button>
+        </form>
 	</body>
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>

@@ -22,4 +22,8 @@ class Crud extends CI_Controller {
     public function registert(){
         
     }
+
+    public function photohome(){
+        
+    }
 }

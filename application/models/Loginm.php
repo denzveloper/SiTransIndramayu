@@ -77,4 +77,19 @@ class Loginm extends CI_Model{
         }
         return $got;
     }
+
+    function getsmimgr($f1, $f2 = FALSE, $f3, $f4){
+        $this->db->from($f1);
+        if($f2 != FALSE){
+            $this->db->where($f2);
+        }
+        $get = $this->db->get();
+        if($get !== FALSE && $get->num_rows() > 0){
+            foreach($get->result() as $hit){
+            $got[] = array('id'=> $hit->id, 'img' => $f3.$hit->$f4);
+            }
+        }
+        return $got;
+    }
+
 }
