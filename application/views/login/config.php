@@ -49,17 +49,17 @@
 		<a href="#">Configure</a>
         <hr>
         <h3>Tampilan Muka</h3>
-        <form action="<?php echo base_url('index.php/crud/config');?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo base_url('index.php/crud/home?todo=update');?>" method="POST" enctype="multipart/form-data">
             <input name="title" value="<?php echo $user['title']; ?>" type="text" placeholder="Title Page" required><br>
             <textarea rows="30" placeholder="Artikel...." name="artikel" required><?php echo $user['content']; ?></textarea>
-            <?php if(!empty($user['img'])){foreach($user['img'] as $img){ ?>
-				<?php echo $img['id']; ?>
-                <img src="<?php echo $this->image->show($img['img']); ?>">
-				<a href="<?php echo base_url('index.php/crud/photohome').$img['id']."&todo=delete";?>"><button class="btn btn-sm btn-danger btn-icon"><i class="fa fa-trash"></i></button></a>
-				<br>
-            <?php }}else{ echo "NO IMAGE YET"; } ?>
             <button type="submit">Simpan</button>
         </form>
+		<?php if(!empty($user['img'])){foreach($user['img'] as $img){ ?>
+				<?php echo $img['id']; ?>
+                <img src="<?php echo $this->image->show($img['img']); ?>">
+				<a href="<?php echo base_url('index.php/crud/home').'?id='.$img['id']."&todo=delete";?>"><button>Delete</button></a>
+				<br>
+        <?php }}else{ echo "NO IMAGE YET"; } ?>
 	</body>
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>

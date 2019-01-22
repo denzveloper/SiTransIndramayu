@@ -33,6 +33,8 @@ class Login extends CI_Controller {
 					$this->session->set_userdata($sesar);
 					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $fnam!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
+					var_dump($msg);
+					exit;
 					redirect('dashboard');
 
 				}else{
@@ -51,9 +53,8 @@ class Login extends CI_Controller {
     public function logout(){
 		$name = $_SESSION['fnam'];
 		$this->loginm->logout();
-		$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'warning');
+		$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'info');
 		$this->session->set_flashdata('info', $msg);
-		print_r($this->session->flashdata('info'));
 		redirect('login');
 	}
 }

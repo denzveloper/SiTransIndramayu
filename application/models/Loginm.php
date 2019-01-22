@@ -22,9 +22,27 @@ class Loginm extends CI_Model{
 
     //Function check access
     function chksess(){
-        return $this->session->userdata('mail');
+        $ret = $this->session->userdata('mail');
+        if(!$ret){
+            $this->session->set_flashdata('info', array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Sorry!", 'txt' => '<i>You are not login</i>', 'typ' => 'danger'));
+        }
+        return $ret;
     }
 
+    //Delete Somedata
+    function delete($f1, $f2, $f3=FALSE){
+        $this->db->where($f2);
+        $this->db->delete($f1);
+        if($f3 == TRUE) $this->db->limit(1);
+        $query = $this->db->affected_rows();
+        if ($query == 0) {
+            return FALSE;
+        }else{
+            return $query;
+        }
+    }
+
+    //Logout delete session
     function logout(){
         //logout
 		$logdt = array(
@@ -33,6 +51,7 @@ class Loginm extends CI_Model{
         $this->session->unset_userdata($logdt);
     }
 
+    //get detail all
     function getail($f1, $f2, $f3){
         if($this->infoex($f1, $f2)){
             $this->db->from($f1);
@@ -44,12 +63,14 @@ class Loginm extends CI_Model{
         }
     }
 
+    //get some data
     function getsm($f1, $f2){
         $this->db->from($f1);
         $query = $this->db->get();
         return $query->row()->$f2;
     }
 
+    //get info
     function infoex($f1, $f2){
         $this->db->select('*');
         $this->db->from($f1);
@@ -62,6 +83,7 @@ class Loginm extends CI_Model{
         }
     }
 
+    //get img
     function getsmimg($f1, $f2 = FALSE, $f3, $f4){
         $this->db->from($f1);
         if($f2 != FALSE){
@@ -78,6 +100,7 @@ class Loginm extends CI_Model{
         return $got;
     }
 
+    //get img with id
     function getsmimgr($f1, $f2 = FALSE, $f3, $f4){
         $this->db->from($f1);
         if($f2 != FALSE){
