@@ -54,9 +54,13 @@ class Login extends CI_Controller {
 		}else{
 			$name = $_SESSION['fnam'];
 			$this->loginm->logout();
-			$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'info');
-			$this->session->set_flashdata('info', $msg);
-			redirect('login');
+			redirect('login/logmsg');
 		}
+	}
+
+	public function logmsg(){
+		$msg[] = array('ico' => 'glyphicon glyphicon-log-out', 'tit' => "Good bye $name!", 'txt' => "<i> Youre now logout.</i>", 'typ' => 'info');
+		$this->session->set_flashdata('info', $msg);
+		redirect('login');
 	}
 }

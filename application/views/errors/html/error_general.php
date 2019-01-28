@@ -12,7 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}
     p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}
     a img{border:0}
+    b{background: #ed2939;color: #fff}
   </style>
   <h2><b>ERROR!</b> <ins><?php echo $heading; ?></ins></h2>
-  <p><?php echo $message; ?>.  <ins>That’s all we know.</ins></p>
+  <p><?php echo $message; ?><ins>That’s all we know.</ins></p>
 </html>

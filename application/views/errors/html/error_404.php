@@ -13,7 +13,8 @@ $link = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 
     body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}
     p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}
     a img{border:0}
+    b{background: #ed2939;color: #fff}
   </style>
-  <h2><b>ERROR 404.</b> <ins>That’s is Not Found.</ins></h2>
+  <h2><b>ERROR 404</b> <ins>That’s is Not Found.</ins></h2>
   <p>The requested URL <code>"<i><?php echo  $link; ?></i>"</code> was not found on this server.  <ins>That’s all we know.</ins></p>
 </html>

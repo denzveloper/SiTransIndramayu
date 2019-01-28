@@ -42,10 +42,11 @@
 		<p><?php echo "$_SESSION[mail] => $_SESSION[fnam] $_SESSION[lnam]"; ?></p>
 		<a href="<?php echo base_url('index.php/login/logout');?>">Keluar</a>
 		<hr>
-		<a href="#">Home</a>
+		<a href="<?php echo base_url('index.php/dashboard'); ?>">Home</a>
 		<a href="<?php echo base_url('index.php/dashboard/artikel'); ?>">Artikel</a>
 		<a href="<?php echo base_url('index.php/dashboard/data'); ?>">Data Transmmigrasi</a>
 		<a href="<?php echo base_url('index.php/dashboard/profil'); ?>">Akun</a>
+		<a href="<?php echo base_url('index.php/dashboard/sandi'); ?>">Password</a>
 		<a href="<?php echo base_url('index.php/dashboard/conf'); ?>">Configure</a>
 	</body>
     <!--   Core JS Files   -->

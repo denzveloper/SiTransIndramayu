@@ -23,13 +23,51 @@ class Crud extends CI_Controller {
         
     }
 
+    public function profil(){
+        if(!$this->loginm->chksess()){
+			redirect("login");
+		}else{
+            $tod = $this->input->get("todo", TRUE);
+
+            if($tod == "update"){
+                $gto = $this->input->get("is", TRUE);
+
+                if($gto == "user"){
+                    $this->form_validation->set_rules('surel', 'Email', 'required|valid_email|max_length[128]');
+                    $this->form_validation->set_rules('fnam', 'First Name', 'required|min_length[1]|max_length[32]');
+                    $this->form_validation->set_rules('pass', 'Password', 'required');
+
+                    if($this->form_validation->run() == TRUE){
+                        $mil = $this->input->post("surel", TRUE);
+                        $fnm = $this->input->post("fnam", TRUE);
+                        $lnm = $this->input->post("lnam", TRUE);
+                        $pas = $this->input->post("pass", TRUE);
+
+                        //
+
+                    }else{
+                        $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                    }
+                }elseif($gto == "pass"){
+                    //
+                }else{
+                    $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Wrong Parameter.</i>', 'typ' => 'warning');
+                }
+            }else{
+                $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
+            }
+            $this->session->set_flashdata('info', $msg);
+            redirect('dashboard/profil');
+        }
+    }
+
     public function home(){
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
             $tod = $this->input->get("todo", TRUE);
 
-            if($tod = "delete"){
+            if($tod == "delete"){
                 $id = $this->input->get("id", TRUE);
                 $name = $this->loginm->getail('home_img', array('id' => $id), 'name');
                 //exit;
@@ -39,13 +77,71 @@ class Crud extends CI_Controller {
                     }
                     $cek = $this->loginm->delete('home_img', array('id' => $id));
                     if($cek != FALSE){
-                        $msg[] = array('ico' => 'glyphicon glyphicon-upload', 'tit' => "Done!", 'txt' => "<i>Image $name deleted.</i>", 'typ' => 'sucess');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-trash', 'tit' => "Done!", 'txt' => "<i>Image $name deleted.</i>", 'typ' => 'success');
                     }else{
                         $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Error!", 'txt' => '<i>Image cannot deleted.</i>', 'typ' => 'danger');
                     }
                 }else{
-                    $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>variable not implemented.</i>', 'typ' => 'warning');
+                    $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Variable not implemented.</i>', 'typ' => 'warning');
                 }
+            }elseif($tod == "home"){
+                $this->form_validation->set_rules('title', 'Page Title', 'required');
+                $this->form_validation->set_rules('artikel', 'Content', 'required');
+                if($this->form_validation->run() == TRUE){
+                    $ttl = $this->input->post("title", TRUE);
+                    $cnt = $this->input->post("artikel", TRUE);
+
+                    $ttl = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $ttl);
+
+                    $array = array('title' => $ttl, 'text' => $cnt);
+                    $cek = $this->loginm->updt('homepage', array('id' => '0'), $array);
+                    if($cek){
+                        $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Homepage has been Update.</i>", 'typ' => 'success');
+                    }
+
+                    if(!empty($_FILES['images'])){
+                        //Configuration Updoad Photos
+                        $config['upload_path'] = './data/img/home/'; //On "userpic" upload
+                        $config['allowed_types'] = 'jpe|jpg|jpeg|png|webp|gif';
+                        $config['max_size'] = '2048';
+                        $config['encrypt_name'] = TRUE;
+                            
+                        $files = $_FILES;
+
+                        $cpt = count($_FILES['images']['name']);
+
+                        for($i=0; $i<$cpt; $i++){           
+                            $_FILES['userfile']['name']= $files['images']['name'][$i];
+                            $_FILES['userfile']['type']= $files['images']['type'][$i];
+                            $name = $files['images']['name'][$i];
+                            $_FILES['userfile']['tmp_name']= $files['images']['tmp_name'][$i];
+                            $_FILES['userfile']['error']= $files['images']['error'][$i];
+                            $_FILES['userfile']['size']= $files['images']['size'][$i];    
+
+                            $this->load->library('upload', $config);
+
+
+                            if($cek1 = $this->upload->do_upload('userfile')){
+                                $fnm = $this->upload->data('file_name');
+                                chmod($config['upload_path'].$fnm, 0777);
+
+                                $cek2 = $this->loginm->addsm('home_img', array('name' => $fnm));
+
+                                if($cek1 && $cek2){
+                                    $msg[] = array('ico' => 'glyphicon glyphicon-upload', 'tit' => "Done!", 'txt' => "<i>Image $name uploaded.</i>", 'typ' => 'success');
+                                }else{
+                                    $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>Image Can not Saved.</i> ', 'typ' => 'warning');
+                                }
+                            }else{
+                                $errmsg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Error!", 'txt' => '<i>'.$this->upload->display_errors()."</i>", 'typ' => 'warning');
+                            }
+                        }
+                    }
+                }else{
+                    $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                }
+            }elseif($tod == "sign"){
+                //
             }else{
                 $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
             }

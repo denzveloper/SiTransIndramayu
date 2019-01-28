@@ -13,7 +13,6 @@ class Dashboard extends CI_Controller {
 
     public function index(){
     	if(!$this->loginm->chksess()){
-            $this->session->set_flashdata('info', array(array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Sorry!", 'txt' => '<i>You are not login</i>', 'typ' => 'danger')));
 			redirect("login");
 		}else{
 			$this->load->view('login/dashboard');
@@ -33,6 +32,23 @@ class Dashboard extends CI_Controller {
 			redirect("login");
 		}else{
 			$this->load->view('login/data');
+		}
+    }
+
+    public function profil(){
+        if(!$this->loginm->chksess()){
+			redirect("login");
+		}else{
+            $data['user']= $this->loginm->getdata('pengguna',array("surel" => $this->session->userdata('mail')));
+			$this->load->view('login/profil', $data);
+		}
+    }
+
+    public function sandi(){
+        if(!$this->loginm->chksess()){
+			redirect("login");
+		}else{
+			$this->load->view('login/sandi');
 		}
     }
 

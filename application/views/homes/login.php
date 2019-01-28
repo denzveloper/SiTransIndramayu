@@ -44,11 +44,11 @@
             </div>
             <h3 class="text-center">Admin Page Login</h3>
             <h5 class="text-center">To sign in, a registered account is needed.</h5>
-            <form method="POST" action="<?php echo base_url('index.php/login'); ?>" autocomplete='off'>
+            <?php echo form_open('login');?>
                 <table>
                     <tr>
                         <td>Email</td>
-                        <td><input type="email" name="mail" placeholder="Email" required></td>
+                        <td><input type="email" name="mail" placeholder="Email" autocomplete="off" required></td>
                     </tr>
                     <tr>
                         <td>Password</td>

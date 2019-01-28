@@ -9,16 +9,27 @@ class Image {
         if ($info['mime'] == 'image/jpeg') 
             $image = imagecreatefromjpeg($source);
     
-        elseif ($info['mime'] == 'image/gif') 
-            $image = imagecreatefromgif($source);
-    
         elseif ($info['mime'] == 'image/png') 
             $image = imagecreatefrompng($source);
+        
+        elseif ($info['mime'] == 'image/gif')
+            $image = imagecreatefromgif($source);
+
+        elseif ($info['mime'] == 'image/webp')
+            $image = imagecreatefromwebp($source);
+
+        else
+            $image = imagecreatefromstring($source);
 
 
         ob_start();
-        imageinterlace($image, true);
-        imagejpeg($image, NULL, $quality);
+        if(strpos($_SERVER['HTTP_USER_AGENT'], "Chrome") !== false) {
+            imageinterlace($image, true);
+            imagewebp($image, NULL, $quality);
+        }else{
+            imageinterlace($image, true);
+            imagejpeg($image, NULL, $quality);
+        }
         $imagedata = ob_get_contents();
         ob_end_clean();
 

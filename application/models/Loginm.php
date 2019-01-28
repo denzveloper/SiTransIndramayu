@@ -33,6 +33,16 @@ class Loginm extends CI_Model{
         return $this->session->userdata('mail');
     }
 
+    function addsm($f1, $f2){
+        $this->db->insert($f1, $f2);
+        $query = $this->db->affected_rows();
+        if ($query == 0) {
+            return FALSE;
+        }else{
+            return $query;
+        }
+    }
+
     //Delete Somedata
     function delete($f1, $f2, $f3=FALSE){
         $this->db->where($f2);
@@ -55,6 +65,18 @@ class Loginm extends CI_Model{
         $this->session->unset_userdata($logdt);
     }
 
+    //get data table
+    function getdata($f1, $f2){
+        if($this->infoex($f1, $f2)){
+            $this->db->from($f1);
+            $this->db->where($f2);
+            $query = $this->db->get();
+            return $query->row();
+        }else{
+            return null;
+        }
+    }
+
     //get detail all
     function getail($f1, $f2, $f3){
         if($this->infoex($f1, $f2)){
@@ -74,7 +96,7 @@ class Loginm extends CI_Model{
         return $query->row()->$f2;
     }
 
-    //get info
+    //get info exists?
     function infoex($f1, $f2){
         $this->db->select('*');
         $this->db->from($f1);
@@ -117,6 +139,18 @@ class Loginm extends CI_Model{
             }
         }
         return $got;
+    }
+
+    //Update
+    function updt($f1, $f2, $f3){
+        $this->db->where($f2);
+        $this->db->update($f1, $f3);
+        $query = $this->db->affected_rows();
+        if ($query == 0) {
+            return FALSE;
+        }else{
+            return $query;
+        }
     }
 
 }

@@ -7,6 +7,8 @@
 	    <title>Dashboard Page</title>
         <!-- Bootstrap core CSS     -->
         <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/trumbowyg/dist/ui/trumbowyg.css'); ?>">
+		<script src="<?php echo base_url('assets/trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.css'); ?>"></script>
         
         <!-- Animation library for notifications   -->
         <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet"/>
@@ -46,12 +48,14 @@
 		<a href="<?php echo base_url('index.php/dashboard/artikel'); ?>">Artikel</a>
 		<a href="<?php echo base_url('index.php/dashboard/data'); ?>">Data Transmmigrasi</a>
 		<a href="<?php echo base_url('index.php/dashboard/profil'); ?>">Akun</a>
-		<a href="#">Configure</a>
+		<a href="<?php echo base_url('index.php/dashboard/sandi'); ?>">Password</a>
+		<a href="<?php echo base_url('index.php/dashboard/conf'); ?>">Configure</a>
         <hr>
         <h3>Tampilan Muka</h3>
-        <form action="<?php echo base_url('index.php/crud/home?todo=update');?>" method="POST" enctype="multipart/form-data">
+		<?php echo form_open_multipart('crud/home?todo=home');?>
             <input name="title" value="<?php echo $user['title']; ?>" type="text" placeholder="Title Page" required><br>
-            <textarea rows="30" placeholder="Artikel...." name="artikel" required><?php echo $user['content']; ?></textarea>
+            <textarea id="trumbowyg" rows="30" placeholder="Artikel...." name="artikel" required><?php echo $user['content']; ?></textarea>
+			<input type="file" multiple="" name="images[]"accept="image/*">
             <button type="submit">Simpan</button>
         </form>
 		<?php if(!empty($user['img'])){foreach($user['img'] as $img){ ?>
@@ -60,10 +64,50 @@
 				<a href="<?php echo base_url('index.php/crud/home').'?id='.$img['id']."&todo=delete";?>"><button>Delete</button></a>
 				<br>
         <?php }}else{ echo "NO IMAGE YET"; } ?>
+		<hr>
+        <h3>Sign</h3>
+		<?php echo form_open_multipart('crud/home?todo=sign');?>
+            <input name="namf" value="<?php echo $user['title']; ?>" type="text" placeholder="Name For Sign 1" required><br>
+			<input name="nams" value="<?php echo $user['title']; ?>" type="text" placeholder="Name For Sign 2" required><br>
+            <button type="submit">Simpan</button>
+        </form>
 	</body>
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+	<!-- Import Trumbowyg -->
+	<script src="<?php echo base_url('assets/trumbowyg/dist/trumbowyg.js'); ?>"></script>
+	<!-- Import Trumbowyg plugins -->
+	<script src="<?php echo base_url('assets/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js'); ?>"></script>
+	
+	<script src="<?php echo base_url('assets/trumbowyg/dist/plugins/base64/trumbowyg.base64.js'); ?>"></script>
+	<script>
+	$('#trumbowyg').trumbowyg({
+		lang: 'id',
+		btnsDef: {
+			// Create a new dropdown
+			image: {
+				dropdown: ['insertImage', 'base64'],
+				ico: 'insertImage'
+			}
+    	},
+		btns: [
+			['viewHTML'],
+			['formatting'],
+			['strong', 'em', 'del'],
+			['superscript', 'subscript'],
+			['foreColor', 'backColor'],
+			['link'],
+			['image'], // Our fresh created dropdown
+			['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+			['unorderedList', 'orderedList'],
+			['horizontalRule'],
+			['removeformat'],
+			['fullscreen']
+    	]
+	});
+	</script>
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
 
