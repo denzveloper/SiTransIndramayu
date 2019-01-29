@@ -93,7 +93,6 @@
 			}
     	},
 		btns: [
-			['viewHTML'],
 			['formatting'],
 			['strong', 'em', 'del'],
 			['superscript', 'subscript'],

@@ -41,9 +41,17 @@ class Crud extends CI_Controller {
                         $mil = $this->input->post("surel", TRUE);
                         $fnm = $this->input->post("fnam", TRUE);
                         $lnm = $this->input->post("lnam", TRUE);
-                        $pas = $this->input->post("pass", TRUE);
+                        $pss = $this->input->post("pass", TRUE);
 
-                        //
+                        $data = array('namadepan' => $fnm, 'namabelakang' => $lnm, 'surel' => $mil);
+                        
+                        $cek = $this->loginm->updpro($pss, $data);
+
+                        if($cek){
+                            $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
+                        }else{
+                            $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
+                        }
 
                     }else{
                         $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
@@ -89,7 +97,7 @@ class Crud extends CI_Controller {
                 $this->form_validation->set_rules('artikel', 'Content', 'required');
                 if($this->form_validation->run() == TRUE){
                     $ttl = $this->input->post("title", TRUE);
-                    $cnt = $this->input->post("artikel", TRUE);
+                    $cnt = $this->input->post("artikel", FALSE);
 
                     $ttl = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $ttl);
 
@@ -97,6 +105,8 @@ class Crud extends CI_Controller {
                     $cek = $this->loginm->updt('homepage', array('id' => '0'), $array);
                     if($cek){
                         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Homepage has been Update.</i>", 'typ' => 'success');
+                    }else{
+                        $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Homepage failed saved.</i> ', 'typ' => 'danger');
                     }
 
                     if(!empty($_FILES['images'])){
