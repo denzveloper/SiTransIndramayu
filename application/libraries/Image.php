@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Image {
     function compress($source){
         $info = getimagesize($source);
-        $quality = 75;
+        $qc = 70;
+        $qo = 80;
 
         if ($info['mime'] == 'image/jpeg') 
             $image = imagecreatefromjpeg($source);
@@ -25,10 +26,10 @@ class Image {
         ob_start();
         if(strpos($_SERVER['HTTP_USER_AGENT'], "Chrome") !== false) {
             imageinterlace($image, true);
-            imagewebp($image, NULL, $quality);
+            imagewebp($image, NULL, $qc);
         }else{
             imageinterlace($image, true);
-            imagejpeg($image, NULL, $quality);
+            imagejpeg($image, NULL, $qo);
         }
         $imagedata = ob_get_contents();
         ob_end_clean();
