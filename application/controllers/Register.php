@@ -9,5 +9,16 @@ class Register extends CI_Controller {
 
     public function index(){
 		$this->load->view('register/first');
-	}
+    }
+    public function first(){
+		$this->load->view('register/first');
+    }
+    
+    public function second(){
+		$this->load->view('register/first');
+    }
+
+    public function confirm(){
+		$this->load->view('register/first');
+    }
 }

@@ -16,6 +16,20 @@
 
 *Config directory on "~/application/config"
 
+
+# This App Including
+1. CodeIgniter PHP Frameworks
+2. Bootstrap 3
+3. TCPDF
+
+
+#Goals
+1. Input data Transmigration
+2. Print data transmigration and Print log data
+3. News about Transmigration
+4. Filtering Data
+
+
 # Made By
 
  **DENDY OCTAVIAN** (*DENZVELOPER - DzEN/DzEN*)  - *[@denzveloper](https://github.com/denzveloper)* 
