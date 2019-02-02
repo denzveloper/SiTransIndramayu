@@ -74,16 +74,16 @@
         </form>
 	</body>
     <!--   Core JS Files   -->
-    <script async src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
-	<script async>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-    <script async src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
 	<!-- Import Trumbowyg -->
-	<script async src="<?php echo base_url('assets/trumbowyg/dist/trumbowyg.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/trumbowyg/dist/trumbowyg.js'); ?>"></script>
 	<!-- Import Trumbowyg plugins -->
-	<script async src="<?php echo base_url('assets/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js'); ?>"></script>
 	
-	<script async src="<?php echo base_url('assets/trumbowyg/dist/plugins/base64/trumbowyg.base64.js'); ?>"></script>
-	<script async>
+	<script src="<?php echo base_url('assets/trumbowyg/dist/plugins/base64/trumbowyg.base64.js'); ?>"></script>
+	<script>
 	$('#trumbowyg').trumbowyg({
 		lang: 'id',
 		btnsDef: {
@@ -109,10 +109,10 @@
 	});
 	</script>
     <!--  Notifications Plugin    -->
-    <script async src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
 
     <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
-        <script async type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function(){
 
                 $.notify({

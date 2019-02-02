@@ -12,7 +12,60 @@ class Crud extends CI_Controller {
     }
     
     public function registerf(){
+        $tod = $this->input->get("todo", TRUE);
 
+            if($tod == "update"){
+                $gto = $this->input->get("is", TRUE);
+
+                if($gto == "gloc"){
+                    $gto1 = $this->input->get("loc", TRUE);
+
+                    echo "<option selected=\"selected\" disabled>--Select Data Above--</option>";
+                    if($gto1 == "gpro"){
+                        $tah = $this->input->post("th",TRUE);
+                        $list = $this->loginm->area(array('tahun' => $tah),'prov');
+                        
+                        if($list != FALSE){
+
+                            foreach($list as $lst){
+                                echo $lst;
+                            }
+                        }
+                    }
+                    if($gto1 == "gkab"){
+                        $tah = $this->input->post("th",TRUE);
+                        $pro = $this->input->post("pr",TRUE);
+                        $list = $this->loginm->area(array('tahun' => $tah, 'prov' => $pro), 'kab');
+                        
+                        if($list != FALSE){
+
+                            foreach($list as $lst){
+                                echo $lst;
+                            }
+                        }
+                    }
+                    if($gto1 == "gloc"){
+                        $tah = $this->input->post("th",TRUE);
+                        $pro = $this->input->post("pr",TRUE);
+                        $kab = $this->input->post("ka",TRUE);
+                        $list = $this->loginm->area(array('tahun' => $tah, 'prov' => $pro, 'kab' => $kab), 'lok');
+                        
+                        if($list != FALSE){
+
+                            foreach($list as $lst){
+                                echo $lst;
+                            }
+                        }
+                    }
+                }else{
+                    echo "ERROR GETTING DATA";
+                }
+            }
+            else{
+                $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
+                $this->session->set_flashdata('info', $msg);
+                redirect('register/first');
+            }
     }
 
     public function registers(){

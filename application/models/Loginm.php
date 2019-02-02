@@ -184,4 +184,41 @@ class Loginm extends CI_Model{
         }
     }
 
+    //Get any data?
+    function getean($f1, $f2=FALSE){
+        $this->db->select('*');
+        $this->db->from($f1);
+        if($f2 != FALSE) $this->db->where($f2);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        }else{
+            return $query->result_array();
+        }
+    }
+
+    function area($f1, $f2){
+        $list = $this->getean('tujuan', $f1);
+        if($list != FALSE){
+            foreach($list as $hit){
+                $what = $hit[$f2];
+                $data[] = "<option value=\"$what\">$what</option>";
+            }
+            return $data;
+        }else{
+            return array(print_r($f1));
+        }
+    }
+
+    function year($f1){
+        $list = $this->getean($f1);
+
+        if($list != FALSE){
+            foreach($list as $hit){
+                $data[] = $hit['tahun'];
+            }
+        }
+
+        return array_unique($data);
+    }
 }

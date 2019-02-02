@@ -51,10 +51,10 @@
 		<a href="<?php echo base_url('index.php/dashboard/conf'); ?>">Configure</a>
 	</body>
     <!--   Core JS Files   -->
-    <script async src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
-    <script async src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
     <!--  Notifications Plugin    -->
-    <script async src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
 
     <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
         <script type="text/javascript">
