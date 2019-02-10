@@ -67,9 +67,9 @@
         <?php }}else{ echo "NO IMAGE YET"; } ?>
 		<hr>
         <h3>Sign</h3>
-		<?php echo form_open_multipart('crud/home?todo=sign');?>
-            <input name="namf" value="<?php echo $user['title']; ?>" type="text" placeholder="Name For Sign 1" required><br>
-			<input name="nams" value="<?php echo $user['title']; ?>" type="text" placeholder="Name For Sign 2" required><br>
+		<?php echo form_open('crud/home?todo=sign');?>
+            <input name="namf" value="<?php echo $namak; ?>" type="text" placeholder="Nama Kepala" required><br>
+			<input name="nik" value="<?php echo $nik; ?>" type="text" placeholder="NIK" required><br>
             <button type="submit">Simpan</button>
         </form>
 	</body>

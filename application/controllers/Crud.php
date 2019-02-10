@@ -20,7 +20,7 @@ class Crud extends CI_Controller {
                 if($gto == "gloc"){
                     $gto1 = $this->input->get("loc", TRUE);
 
-                    echo "<option selected=\"selected\" disabled>--Select Data Above--</option>";
+                    echo "<option selected=\"selected\" disabled>--Select Data First!--</option>";
                     if($gto1 == "gpro"){
                         $tah = $this->input->post("th",TRUE);
                         $list = $this->loginm->area(array('tahun' => $tah),'prov');
@@ -103,11 +103,11 @@ class Crud extends CI_Controller {
                         if($cek){
                             $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
                         }else{
-                            $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
                         }
 
                     }else{
-                        $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
                     }
                 }elseif($gto == "pass"){
                     //
@@ -146,20 +146,18 @@ class Crud extends CI_Controller {
                     $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Variable not implemented.</i>', 'typ' => 'warning');
                 }
             }elseif($tod == "home"){
-                $this->form_validation->set_rules('title', 'Page Title', 'required');
+                $this->form_validation->set_rules('title', 'Page Title', 'required|alpha_dash');
                 $this->form_validation->set_rules('artikel', 'Content', 'required');
                 if($this->form_validation->run() == TRUE){
                     $ttl = $this->input->post("title", TRUE);
                     $cnt = $this->input->post("artikel", FALSE);
-
-                    $ttl = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $ttl);
 
                     $array = array('title' => $ttl, 'text' => $cnt);
                     $cek = $this->loginm->updt('homepage', array('id' => '0'), $array);
                     if($cek){
                         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Homepage has been Update.</i>", 'typ' => 'success');
                     }else{
-                        $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Homepage failed saved.</i> ', 'typ' => 'danger');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Homepage failed saved.</i> ', 'typ' => 'danger');
                     }
 
                     if(!empty($_FILES['images'])){
@@ -193,18 +191,33 @@ class Crud extends CI_Controller {
                                 if($cek1 && $cek2){
                                     $msg[] = array('ico' => 'glyphicon glyphicon-upload', 'tit' => "Done!", 'txt' => "<i>Image $name uploaded.</i>", 'typ' => 'success');
                                 }else{
-                                    $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>Image Can not Saved.</i> ', 'typ' => 'warning');
+                                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>Image Can not Saved.</i> ', 'typ' => 'warning');
                                 }
                             }else{
-                                $errmsg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Error!", 'txt' => '<i>'.$this->upload->display_errors()."</i>", 'typ' => 'warning');
+                                $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Error!", 'txt' => '<i>'.$this->upload->display_errors()."</i>", 'typ' => 'warning');
                             }
                         }
                     }
                 }else{
-                    $errmsg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
                 }
             }elseif($tod == "sign"){
-                //
+                $this->form_validation->set_rules('namf', 'Nama Kepala', 'required');
+                $this->form_validation->set_rules('nik', 'NIK Kepala', 'required|numeric');
+
+                if($this->form_validation->run() == TRUE){
+                    $nam = $this->input->post("namf", TRUE);
+                    $nik = $this->input->post("nik", FALSE);
+                    $array = array('nama_kepala' => $nam, 'nik' => $nik);
+                    $cek = $this->loginm->updt('kepaladinas', array('id' => '0'), $array);
+                    if($cek){
+                        $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Sign has been Update.</i>", 'typ' => 'success');
+                    }else{
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Sign failed saved.</i> ', 'typ' => 'danger');
+                    }
+                }else{
+                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                }
             }else{
                 $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
             }

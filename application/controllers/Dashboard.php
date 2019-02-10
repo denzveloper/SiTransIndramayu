@@ -57,7 +57,31 @@ class Dashboard extends CI_Controller {
 			redirect("login");
 		}else{
             $data['user'] = array('title' => $this->loginm->getsm('homepage', 'title'), 'content' => $this->loginm->getsm('homepage', 'text'), 'img' => $this->loginm->getsmimgr('home_img', FALSE, 'data/img/home/', 'name'));
+            $data['namak'] = $this->loginm->getsm('kepaladinas','nama_kepala');
+            $data['nik'] = $this->loginm->getsm('kepaladinas','nik');
 			$this->load->view('login/config', $data);
 		}
+    }
+
+    public function print(){
+        if(!$this->loginm->chksess()) {
+            redirect("login");
+        }else{
+            $this->load->model('loginm');
+            $tod = $this->input->get("todo", TRUE);
+
+            if($tod == "family"){
+                $this->load->library('pdf');
+                $who = $this->input->get("who", TRUE);
+                $data['dok'] = $this->loginm->getean('data_kk', array('id' => $who));
+                $this->load->view("login/data/cetakf",$data);
+            }elseif($tod == "select"){
+                $this->load->library('pdf');
+                //Belum jadi
+                //$this->load->view("login/data/cetaks",$data);
+            }else{
+
+            }
+        }
     }
 }

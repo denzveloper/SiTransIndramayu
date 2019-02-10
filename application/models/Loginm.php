@@ -221,4 +221,18 @@ class Loginm extends CI_Model{
 
         return array_unique($data);
     }
+
+    function chkean($f1, $f2){
+        $this->db->select('*');
+        $this->db->from($f1);
+        $this->db->where($f2);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    
 }
