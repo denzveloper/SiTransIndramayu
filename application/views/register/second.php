@@ -18,7 +18,7 @@
       <tbody>
         <tr>
           <td colspan="4">
-            <h4 align="center">DATA KEPALA KELUARGA CALON TRANSMIGRAN (KK)</h>
+            <h4 align="center">DATA KEPALA KELUARGA CALON TRANSMIGRAN (KK)</h4>
           </td>
 
           </tr>

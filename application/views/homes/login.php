@@ -1,73 +1,59 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Desktop Welcome Page</title>
-        <!-- Bootstrap core CSS     -->
-        <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Desktop Welcome Page</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
+
+    <!-- Bootstrap core CSS     -->
+    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
         
-        <!-- Animation library for notifications   -->
-        <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet"/>
-        
-        <style>
-            .content{
-                max-width: 450px;
-                margin: auto;
-                padding: 10px;
-                align: center;
-                filter: blur(0px);
-            }
-            table{
-                border: 1px solid #888;
-                border-left: 4px solid #4CAF50;
-                width: 50%;
-                margin: 0px auto;
-                float: none;
-            }
-            th, td{
-                padding: 4px;
-                text-align: left;
-            }
-            body{
-                background: #70e1f5;  /* fallback for old browsers */
-                background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
-                background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            }
-        </style>
-    </head>
-    <body>
-        <div class="content">
-            <div class="text-center">
-                <img class="img-fluid" width="40%" src="<?php echo $this->image->show(); ?>" alt="..."/>
+    <!-- Animation library for notifications   -->
+    <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet"/>
+
+    <link href="<?php echo base_url('assets/css/style.css'); ?>" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+    <div class="sufee-login d-flex align-content-center flex-wrap"> 
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                        <img class="align-content" width="40%" src="<?php echo $this->image->show(); ?>" alt="...">
+                </div>
+                <div class="login-form">
+                    <?php echo form_open('login');?>
+                        <div class="form-group">
+                            <input type="email" name="mail" class="form-control" placeholder="Email">
+                        </div>
+                            <div class="form-group">
+                                <input type="password" name="pass" class="form-control" placeholder="Password">
+                        </div>
+
+                            <div class="form-group">
+                                <label>Lupa Sandi? 
+                                <a href="<?php echo base_url('index.php/forget'); ?>">Disini!</a>
+                                </label>
+                            </div>
+                                <button type="submit" class="btn btn-primary btn-flat m-b-40 m-t-40">Masuk</button>
+                    </form>
+                </div>
             </div>
-            <h3 class="text-center">Admin Page Login</h3>
-            <h5 class="text-center">To sign in, a registered account is needed.</h5>
-            <?php echo form_open('login');?>
-                <table>
-                    <tr>
-                        <td>Email</td>
-                        <td><input type="email" name="mail" placeholder="Email" autocomplete="off" required></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="pass" placeholder="Password" required><br></td>
-                    </tr>
-                    <tr>
-                        <td colspan='2' style="text-align:right"><button name="btn-login" type="submit" class="btn">Masuk</button></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="<?php echo base_url('index.php/forget'); ?>">Forgot Password?</a>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <br>
-            <p class="text-center">This Login only for Administrator.<br><a href="<?php echo base_url('index.php/home'); ?>">..Back</a></p>
         </div>
-    </body>
+    </div>
+</body>
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>

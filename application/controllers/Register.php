@@ -20,6 +20,7 @@ class Register extends CI_Controller {
       $this->form_validation->set_rules('kab', 'Kota Tujuan', 'required');
       $this->form_validation->set_rules('lok', 'Lokasi Tujuan', 'required');
       if($this->form_validation->run() == TRUE){
+        $jet = $this->input->post("jt", TRUE);
         $tah = $this->input->post("ta", TRUE);
         $pro = $this->input->post("prov", TRUE);
         $kab = $this->input->post("kab", TRUE);
@@ -35,8 +36,10 @@ class Register extends CI_Controller {
         //Nanti pindah ke konfirm
         $id = $this->loginm->getail('tujuan', $array, 'id');
         //-----------------------
-        $this->session->set_tempdata('place', $array, 3600);
+        $this->session->set_tempdata('place', $array, 7200);
+        $this->session->set_tempdata('jet', $jet, 7200);
         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>$lok Selected.</i>", 'typ' => 'success');
+        $this->session->set_flashdata('info', $msg);
         $this->load->view('register/second');
       }else{
         $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
@@ -80,8 +83,9 @@ class Register extends CI_Controller {
         
         $array = array('id_tuju' => $id, 'date' => date('Y-m-d H:i:s'), 'namakk' => $nam, 'alamat' => $add, 'desa' => $des, 'kecamatan' => $kec, 'kabupaten' => $kot, 'provinsi' => $pro, 'tmp_lh' => $tel, 'tl' => $tal, 'ttk' => $tak, 'pendidikan' => $pen, 'pekerjaan' => $pek, 'pendapatan' => $gaj, 'luastinggal' => $tnh);
 
-        $this->session->set_tempdata('kk', $array, 3600);
+        $this->session->set_tempdata('kepala', $array, 7200);
         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Data Saved.</i>", 'typ' => 'success');
+        $this->session->set_flashdata('info', $msg);
 
         $this->load->view('register/third');
       }else{
@@ -92,7 +96,63 @@ class Register extends CI_Controller {
     }
 
     public function confirm(){
-		  $this->load->view('register/first');
+		  $this->form_validation->set_rules('name[]', 'Nama', 'required');
+      $this->form_validation->set_rules('umur[]', 'Usia', 'required');
+      $this->form_validation->set_rules('jk[]', 'Jenis Kelamin', 'required');
+      $this->form_validation->set_rules('hub[]', 'Hubungan Keluarga', 'required');
+      $this->form_validation->set_rules('agama[]', 'Agama', 'required');
+      $this->form_validation->set_rules('pendidikan[]', 'Pendidikan', 'required');
+      $this->form_validation->set_rules('kerja[]', 'Kerja', 'required');
+      if($this->form_validation->run() == TRUE){
+        $nam = $this->input->post("name", TRUE);
+        $umu = $this->input->post("umur", TRUE);
+        $jek = $this->input->post("jk", TRUE);
+        $hub = $this->input->post("hub", TRUE);
+        $ama = $this->input->post("agama", TRUE);
+        $pen = $this->input->post("pendidikan", TRUE);
+        $kja = $this->input->post("kerja", TRUE);
+        $ket = $this->input->post("ket", TRUE);
+        for($x=0; $x<sizeof($nam); $x++){
+          $array[] = array('nama' => $nam[$x], 'umur' => $umu[$x], 'jk' => $jek[$x], 'hubungan' => $hub[$x], 'agama' => $ama[$x], 'pendidikan' => $pen[$x], 'pekerjaan' => $kja[$x], 'keterangan' => $ket[$x]);
+        }
+        $this->session->set_tempdata('tanggungan', $array, 7200);
+        $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Data Saved.</i>", 'typ' => 'success');
+        $this->session->set_flashdata('info', $msg);
+        $this->load->view('register/confirm');
+        
+      }else{
+        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+        $this->session->set_flashdata('info', $msg);
+        redirect('register/third');
+      }
     }
 
+    public function save(){
+      $u = $this->session->tempdata('place');
+      $j = $this->session->tempdata('jet');
+      $k = $this->session->tempdata('kepala');
+      $t = $this->session->tempdata('tanggungan');
+
+      //Save to database
+      $date = date("Y-m-d H:i:s");
+      $array = array_merge($k, array('jenis' => $j, 'date' => $date));
+      $cek = $this->loginm->addsm('data_kk', $array);
+
+      $kk = $this->loginm->getail('data_kk', $array, 'id');
+
+      if(!empty($kk)  && $cek!=FALSE){
+        foreach($t as $tg){
+          $this->loginm->addsm('data_tanggung', array_merge($tg, array('id_kk' => $kk)));
+        }
+      }else{
+        echo 'error';
+        exit;
+      }
+      $this->session->unset_tempdata('place');
+      $this->session->unset_tempdata('jet');
+      $this->session->unset_tempdata('kepala');
+      $this->session->unset_tempdata('tanggungan');
+      
+      redirect('register');
+    }
 }

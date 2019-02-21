@@ -35,6 +35,14 @@ class Dashboard extends CI_Controller {
 		}
     }
 
+    public function user(){
+        if(!$this->loginm->chksess()){
+			redirect("login");
+		}else{
+			$this->load->view('login/user');
+		}
+    }
+
     public function profil(){
         if(!$this->loginm->chksess()){
 			redirect("login");

@@ -97,20 +97,55 @@ class Crud extends CI_Controller {
                         $pss = $this->input->post("pass", TRUE);
 
                         $data = array('namadepan' => $fnm, 'namabelakang' => $lnm, 'surel' => $mil);
-                        
-                        $cek = $this->loginm->updpro($pss, $data);
 
-                        if($cek){
-                            $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
+                        $mail = $_SESSION['mail'];
+                        $cek = $this->loginm->login($mail, $psl);
+                        
+                        if($cek != FALSE){
+                            $cek1 = $this->loginm->updpro($pss, $data);
+
+                            if($cek1){
+                                $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
+                            }else{
+                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
+                            }
                         }else{
-                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i> ', 'typ' => 'danger');
                         }
 
                     }else{
                         $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
                     }
+                    $this->session->set_flashdata('info', $msg);
+                    redirect('dashboard/profil');
                 }elseif($gto == "pass"){
-                    //
+                    $this->form_validation->set_rules('pasf', 'Password', 'required|min_length[4]');
+                    $this->form_validation->set_rules('pass', 'Password', 'required|min_length[4]');
+                    $this->form_validation->set_rules('pasl', 'Password', 'required');
+                    if($this->form_validation->run() == TRUE){
+                        $paf = $this->input->post("pasf", TRUE);
+                        $pas = $this->input->post("pass", TRUE);
+                        $psl = $this->input->post("pasl", TRUE);
+                        
+                        $mail = $_SESSION['mail'];
+                        $cek = $this->loginm->login($mail, $psl);
+                        if($cek != FALSE && $paf == $pas){
+                        
+                            $cek1 = $this->loginm->updsan($psl, $paf);
+                            
+                            if($cek1 != FALSE){
+                                $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Password has been Update.</i>", 'typ' => 'success');
+                            }else{
+                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Password failed saved.</i> ', 'typ' => 'danger');
+                            }
+                        }else{
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i> ', 'typ' => 'danger');
+                        }
+                    }else{
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                    }
+                    $this->session->set_flashdata('info', $msg);
+                    redirect('dashboard/sandi');
                 }else{
                     $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Wrong Parameter.</i>', 'typ' => 'warning');
                 }
@@ -118,7 +153,7 @@ class Crud extends CI_Controller {
                 $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
             }
             $this->session->set_flashdata('info', $msg);
-            redirect('dashboard/profil');
+            redirect('dashboard');
         }
     }
 
@@ -146,7 +181,7 @@ class Crud extends CI_Controller {
                     $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Variable not implemented.</i>', 'typ' => 'warning');
                 }
             }elseif($tod == "home"){
-                $this->form_validation->set_rules('title', 'Page Title', 'required|alpha_dash');
+                $this->form_validation->set_rules('title', 'Page Title', 'required|alpha_dash|xss_clean');
                 $this->form_validation->set_rules('artikel', 'Content', 'required');
                 if($this->form_validation->run() == TRUE){
                     $ttl = $this->input->post("title", TRUE);

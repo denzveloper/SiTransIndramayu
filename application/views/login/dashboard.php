@@ -44,7 +44,7 @@
 		<hr>
 		<a href="<?php echo base_url('index.php/dashboard'); ?>">Home</a>
 		<a href="<?php echo base_url('index.php/dashboard/artikel'); ?>">Artikel</a>
-		<a href="<?php echo base_url('index.php/dashboard/data'); ?>">Data Transmmigrasi</a>
+		<a href="<?php echo base_url('index.php/dashboard/data'); ?>">Data Transmigrasi</a>
 		<a href="<?php echo base_url('index.php/dashboard/user'); ?>">Manajer Pengguna</a>
 		<a href="<?php echo base_url('index.php/dashboard/profil'); ?>">Akun</a>
 		<a href="<?php echo base_url('index.php/dashboard/sandi'); ?>">Password</a>

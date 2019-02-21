@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <title>Home's</title>
         <link rel="stylesheet" href="https://denzveloper.github.io/lightdm-gab-gradient/static/style.css" />
     </head>

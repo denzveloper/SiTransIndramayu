@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Loginm extends CI_Model{
+    
+    public function __construct(){
+        date_default_timezone_set("Asia/Bangkok");
+    }
 
     //You Know lah ini login
     function login($f1, $f2){
@@ -168,6 +172,38 @@ class Loginm extends CI_Model{
         }else{
             $this->logout();
             $cek = $this->login($f2['surel'], $f1);
+            if ($cek != FALSE){
+                foreach ($cek as $hit){
+            	    $sesar = array(
+                        'logged_in' => TRUE,
+                        'mail' => $hit->surel,
+                        'fnam' => $hit->namadepan,
+                        'lnam' => $hit->namabelakang
+                    );
+                }
+                //set session userdata
+                $this->session->set_userdata($sesar);
+            }
+            return $query;
+        }
+    }
+
+    function updsan($f1, $f2){
+        //Library
+        $this->load->library('session');
+        $mail = $_SESSION['mail'];
+        $this->load->library("safe");
+        $pss = $this->safe->encrypt($f1);
+        $psn = $this->safe->encrypt($f2);
+        $this->db->where('surel', $mail);
+        $this->db->where('sandi', $pss);
+        $this->db->update("pengguna", array('sandi' => $psn));
+        $query = $this->db->affected_rows();
+        if ($query == 0) {
+            return FALSE;
+        }else{
+            $this->logout();
+            $cek = $this->login($mail, $f2);
             if ($cek != FALSE){
                 foreach ($cek as $hit){
             	    $sesar = array(
