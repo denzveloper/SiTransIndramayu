@@ -99,7 +99,7 @@ class Crud extends CI_Controller {
                         $data = array('namadepan' => $fnm, 'namabelakang' => $lnm, 'surel' => $mil);
 
                         $mail = $_SESSION['mail'];
-                        $cek = $this->loginm->login($mail, $psl);
+                        $cek = $this->loginm->login($mail, $pss);
                         
                         if($cek != FALSE){
                             $cek1 = $this->loginm->updpro($pss, $data);
@@ -107,7 +107,7 @@ class Crud extends CI_Controller {
                             if($cek1){
                                 $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
                             }else{
-                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile failed saved.</i> ', 'typ' => 'danger');
+                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile not saved.</i> ', 'typ' => 'danger');
                             }
                         }else{
                             $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i> ', 'typ' => 'danger');
