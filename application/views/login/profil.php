@@ -99,7 +99,7 @@
 						<li>
                             <a href="<?php echo base_url('index.php/dashboard/profil');?>" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-user"></i>
-								<p><?php echo $_SESSION['fnam'];?></p>
+								<p><?php echo $_SESSION['nama'];?></p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -147,6 +147,30 @@
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Alamat Surel</label>
                                                 <input name="surel" value="<?php echo $user->surel; ?>" type="email" class="form-control border-input" placeholder="Email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>NIP</label>
+                                                <input name="nip" value="<?php echo $user->nip; ?>" type="text" class="form-control border-input" placeholder="NIP" onkeypress="return number(event);" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Golongan/Pangkat</label>
+                                                <input name="pkg" value="<?php echo $user->pangkatgol; ?>" type="text" class="form-control border-input" placeholder="Pangkat dan Golongan" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jabatan</label>
+                                                <input name="jbt" type="text" value="<?php echo $user->jabatan; ?>" class="form-control border-input" placeholder="Jabatan" required>
                                             </div>
                                         </div>
                                     </div>
@@ -232,5 +256,12 @@
         });
 	</script>
     <?php } } ?>
+
+    <script>
+    function number(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+    }
+    </script>
 
 </html>

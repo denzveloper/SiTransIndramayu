@@ -25,6 +25,9 @@
     <link href='<?php echo base_url('assets/fonts/muli/font.css');?>' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url('assets/css/themify-icons.css'); ?>" rel="stylesheet">
 
+	<!--  Table     -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/datatables/datatables.min.css'); ?>"/>
+
 </head>
 <body>
 
@@ -48,7 +51,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<?php echo base_url('index.php/dashboard/artikel');?>">
                         <i class="ti-rss"></i>
                         <p>Artikel</p>
@@ -82,7 +85,7 @@
     	</div>
     </div>
 
-    <div class="main-panel">
+	<div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -117,66 +120,50 @@
         </nav>
 
         <div class="content">
-		<?php echo form_open('crud/profil?todo=update&is=pass');?>
-		<div class="container-fluid">
+
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="card card-user">
-                            <img width="128px" src="<?php echo $this->image->show(); ?>" alt="..." id="foto" class="img-responsive img-rounded center-block"/>
-                            <div class="content text-center">
-                                    <h4 class="title"><?php echo $_SESSION['nama']; ?><br />
-                                        <a href="#"><small><?php echo $_SESSION['mail']; ?></small></a>
-                                    </h4>
-                            </div>
-                            <div class="footer">
-                                <hr />
-                                <div class="stats">
-                                    <a href="<?php echo base_url('index.php/dashboard/profil');?>"><i class="ti-user"></i> Edit Profil</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-7">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Ubah Sandi</h4>
+                                <a href="<?php echo base_url('index.php/dashboard/newuser');?>"><button class="btn btn-success pull-right">Add User</button></a>
+                                <h4 class="title">Manager Data Trans</h4>
+                                <p class="category">Mengatur Data Transmigrasi yang dikirimkan</p>
                             </div>
                             <div class="content">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Sandi Baru</label>
-                                                <input name="pasf" type="password" class="form-control border-input" placeholder="Sandi Baru" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Konfirmasi Sandi Baru</label>
-                                                <input name="pass" type="password" class="form-control border-input" placeholder="Ulangi Sandi Baru" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Sandi Lama</label>
-                                                <input name="pasl" type="password" class="form-control border-input" placeholder="Sandi Lama" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Perbarui Sandi</button>
-                                    </div>
+                                <table id="tableusr" class="table display table-hover">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Asal</th>
+                                        <th scope="col">Tujuan</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if(!empty($user)){ $x = 1; foreach($user as $hit){
+                                        echo "<tr>";
+                                        echo "<th scope='row'>$x</th>";
+                                        echo "<td>$hit[surel]</td>";
+                                        echo "<td>$hit[nama]</td>";
+                                        echo "<td>$hit[level]</td>";
+                                        echo "<td>
+												<a href='$hit[link]&todo=block' onclick=\"return confirm('Yakin ingin $hit[stat] $hit[nama]?')\"><button class=\"btn btn-sm btn-warning btn-icon\" title=\"$hit[stat]\">$hit[text]</button></a>";
+										if($hit['block']){
+											echo "&nbsp;&middot;&nbsp;<a href='$hit[link]&todo=delete' onclick=\"return confirm('Yahkin ingin menghapus $hit[nama]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Delete User\"><i class=\"fa fa-trash\"></i></button></a>
+											</td>";
+										}
+                                        echo "</tr>";
+                                        $x++;
+                                    }}else{ echo "<tr><td colspan='5'><h4 class='text-center'>EMPTY</h4></td></tr>"; } ?>
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-			</form>
         </div>
 
 
@@ -191,7 +178,6 @@
     </div>
 </div>
 
-
 </body>
 
     <!--   Core JS Files   -->
@@ -200,15 +186,21 @@
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url('assets/js/paper-dashboard.js'); ?>"></script>
-
-
-	<!--  Charts Plugin -->
-	<script src="<?php echo base_url('assets/js/chartist.min.js'); ?>"></script>
-
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>"></script>
+    
+    <!--  Table Plugin    -->
+    <script type="text/javascript" src="<?php echo base_url('assets/datatables/datatables.min.js'); ?>"></script>
 
-    <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
+    <script>
+        $(document).ready(function() {
+            $('#tableusr').DataTable({ "aLengthMenu": [[7, 10, 21, 30, -1], [7, 10, 21, 30, "Semua"]],
+        "iDisplayLength": 7, "language": {"url": "<?php echo base_url('assets/datatables/Indonesian.json');?>"}
+        });
+        } );
+    </script>
+
+<?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
     <script type="text/javascript">
         $(document).ready(function(){
 

@@ -15,6 +15,7 @@ class Loginm extends CI_Model{
         $this->db->from('pengguna');
         $this->db->where('surel', $f1);
         $this->db->where('sandi', $ps);
+        $this->db->where('block', 0);
         $this->db->limit(1);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
@@ -206,11 +207,16 @@ class Loginm extends CI_Model{
             $cek = $this->login($mail, $f2);
             if ($cek != FALSE){
                 foreach ($cek as $hit){
+                    $nd = $hit->namadepan;
+					$nb = $hit->namabelakang;
+					$name = $nd." ".$nb;
             	    $sesar = array(
                         'logged_in' => TRUE,
-                        'mail' => $hit->surel,
-                        'fnam' => $hit->namadepan,
-                        'lnam' => $hit->namabelakang
+						'mail' => $hit->surel,
+						'fnam' => $nd,
+						'lnam' => $nb,
+						'nama' => $this->loginm->singkat($name),
+						'lvl' => $hit->level
                     );
                 }
                 //set session userdata
@@ -268,6 +274,52 @@ class Loginm extends CI_Model{
             return TRUE;
         }else{
             return FALSE;
+        }
+    }
+
+    //... when > 16 char
+    function singkat($an, $x = 16){
+        if (strlen($an) > $x){
+            $x = $x - 3;
+            $an = substr($an, 0, $x) . '&#8230;';
+        }
+        return $an;
+    }
+
+    function getusrall(){
+        $this->load->library("safe");
+        $q = $this->db->from('pengguna')->where('level >', '0')->get();
+        if($q->num_rows() != 0){
+            foreach($q->result_array() as $row){
+                $n = $row['namadepan']; 
+                $n .= ' '.$row['namabelakang'];
+                $row['nama'] = $this->singkat($n, 20);
+                $row['stat'] = "Blokir";
+                $row['text'] = "<i class=\"fa fa-lock\"></i>";
+                if($row['block'] == 1){ $row['stat'] = "Unblock"; $row['text'] = "<i class=\"fa fa-unlock\"></i>";}
+                $row['link'] = base_url('index.php/crud/usrtodo?usr=').$this->safe->encrypt($row['surel'], $_SESSION['mail']);
+                $data[] = $row;
+            }
+            return $data;
+        }else{
+            return FALSE;
+        }
+    }
+
+    //Blocking User
+    function blockus($f1){
+        $dis = $this->getail('pengguna', array('surel' => $f1), 'block');
+        
+        $this->db->where('surel', $f1);
+        if($dis) $this->db->set("block", '0', false);
+        else $this->db->set("block", '1', false);
+        $this->db->update('pengguna');
+        
+        $query = $this->db->affected_rows();
+        if ($query == 0) {
+            return FALSE;
+        }else{
+            return $query;
         }
     }
     

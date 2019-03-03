@@ -45,7 +45,7 @@
      <div class="form-group">
       <label class="col-md-4 control-label">Usia</label>
       <div class="col-md-8 inputGroupContainer">
-       <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="umur" name="umur[]" placeholder="Usia Saat ini" class="form-control umur" required="true" type="text"></div>
+       <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="umur" name="umur[]" placeholder="Usia Saat ini" class="form-control umur" required="true" type="text" onkeypress="return number(event);"></div>
      </div>
    </div>
    <div class="form-group">
@@ -143,9 +143,11 @@
 <!--   JQUERY-UI Files   -->
 <script src="<?php echo base_url('assets/js/jquery-ui.js'); ?>"></script>
 <script>
-  $( function() {
-    $( ".umur" ).keypress(function(e) {allowNumbersOnly(e); } );
-  } );
+  function number(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+  }
+  
   var data_fo = $('.add-field').html();
     var sd = '<button class="btn btn-danger remove-add-more">-</button><br><br><br>';
     var data_combine = data_fo.concat(sd);

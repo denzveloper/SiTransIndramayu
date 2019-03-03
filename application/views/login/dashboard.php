@@ -99,7 +99,7 @@
 						<li>
                             <a href="<?php echo base_url('index.php/dashboard/profil');?>" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-user"></i>
-								<p><?php echo $_SESSION['fnam'];?></p>
+								<p><?php echo $_SESSION['nama'];?></p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -131,7 +131,7 @@
                                     <div class="col-xs-7">
                                         <div class="numbers">
                                             <p>Nama Anda</p>
-                                            <?php echo $_SESSION['fnam'];?>
+                                            <?php echo $_SESSION['nama'];?>
                                             <p class="category"><?php echo $_SESSION['mail']; ?></p>
                                         </div>
                                     </div>

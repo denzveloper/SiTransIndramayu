@@ -22,16 +22,20 @@ class Login extends CI_Controller {
 				$cek = $this->loginm->login($mail, $pass);
 				if ($cek != FALSE){
 					foreach ($cek as $hit){
+						$nd = $hit->namadepan;
+						$nb = $hit->namabelakang;
+						$name = $nd." ".$nb;
 						$sesar = array(
 							'logged_in' => TRUE,
 							'mail' => $hit->surel,
-							'fnam' => $hit->namadepan,
-							'lnam' => $hit->namabelakang
+							'fnam' => $nd,
+							'lnam' => $nb,
+							'nama' => $this->loginm->singkat($name),
+							'lvl' => $hit->level
 						);
-						$fnam = $hit->namadepan;
 					}
 					$this->session->set_userdata($sesar);
-					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $fnam!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
+					$msg[] = array('ico' => 'glyphicon glyphicon-log-in', 'tit' => "Hi, $name!", 'txt' => "<i>Welcome to Admin Page.</i>", 'typ' => 'success');
 					$this->session->set_flashdata('info', $msg);
 					redirect('dashboard');
 

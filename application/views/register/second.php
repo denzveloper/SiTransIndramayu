@@ -103,13 +103,13 @@
 <div class="form-group">
   <label class="col-md-4 control-label">Pendapatan/Perkapita/Pertahun 「Rp.」</label>
   <div class="col-md-8 inputGroupContainer">
-   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span><input id="salary" name="gaji" placeholder="Pendapatan/Perkapita/Pertahun" class="form-control" required="true" type="number"></div>
+   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span><input id="salary" name="gaji" placeholder="Pendapatan/Perkapita/Pertahun" class="form-control" required="true" type="text" onkeypress="return number(event);"></div>
  </div>
 </div>
 <div class="form-group">
   <label class="col-md-4 control-label">Luas tanah yang ditinggalkan 「M<sup>2</sup>」</label>
   <div class="col-md-8 inputGroupContainer">
-   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="home" name="tanah" placeholder="Luas tanah yang ditinggalkan" class="form-control" required="true" type="number"></div>
+   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="home" name="tanah" placeholder="Luas tanah yang ditinggalkan" class="form-control" required="true" type="text" onkeypress="return number(event);"></div>
  </div>
 </div>
 </div>
@@ -133,9 +133,11 @@
   $( function() {
     $( "#dateborn" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#datewed" ).datepicker({ dateFormat: 'yy-mm-dd' });
-    $( "#salary" ).keypress(function(e) {allowNumbersOnly(e); } );
-    $( "#home" ).keypress(function(e) {allowNumbersOnly(e); } );
   } );
+  function number(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+  }
 </script>
 <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
     <script type="text/javascript">

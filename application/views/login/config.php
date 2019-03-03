@@ -102,7 +102,7 @@
 						<li>
                             <a href="<?php echo base_url('index.php/dashboard/profil');?>" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-user"></i>
-								<p><?php echo $_SESSION['fnam'];?></p>
+								<p><?php echo $_SESSION['nama'];?></p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">

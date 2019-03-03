@@ -35,11 +35,20 @@ class Dashboard extends CI_Controller {
 		}
     }
 
-    public function user(){
+    public function tuju(){
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-			$this->load->view('login/user');
+			$this->load->view('login/tuju');
+		}
+    }
+
+    public function user(){
+        if(!$this->loginm->chksess()||$_SESSION['lvl']!=0){
+			    redirect("login");
+		}else{
+            $data['user'] = $this->loginm->getusrall();
+			$this->load->view('login/user', $data);
 		}
     }
 

@@ -88,15 +88,21 @@ class Crud extends CI_Controller {
                 if($gto == "user"){
                     $this->form_validation->set_rules('surel', 'Email', 'required|valid_email|max_length[128]');
                     $this->form_validation->set_rules('fnam', 'First Name', 'required|min_length[1]|max_length[32]');
+                    $this->form_validation->set_rules('nip', 'NIP', 'required|is_natural');
+                    $this->form_validation->set_rules('pkg', 'Pangkat/Golongan', 'required');
+                    $this->form_validation->set_rules('jbt', 'Jabatan', 'required');
                     $this->form_validation->set_rules('pass', 'Password', 'required');
 
                     if($this->form_validation->run() == TRUE){
                         $mil = $this->input->post("surel", TRUE);
                         $fnm = $this->input->post("fnam", TRUE);
                         $lnm = $this->input->post("lnam", TRUE);
+                        $nip = $this->input->post("nip", TRUE);
+                        $pkg = $this->input->post("pkg", TRUE);
+                        $jbt = $this->input->post("jbt", TRUE);
                         $pss = $this->input->post("pass", TRUE);
 
-                        $data = array('namadepan' => $fnm, 'namabelakang' => $lnm, 'surel' => $mil);
+                        $data = array('namadepan' => $fnm, 'namabelakang' => $lnm, 'surel' => $mil, 'nip' => $nip, 'pangkatgol' => $pkg, 'jabatan' => $jbt);
 
                         $mail = $_SESSION['mail'];
                         $cek = $this->loginm->login($mail, $pss);
@@ -107,14 +113,14 @@ class Crud extends CI_Controller {
                             if($cek1){
                                 $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Profile has been Update.</i>", 'typ' => 'success');
                             }else{
-                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile not saved.</i> ', 'typ' => 'danger');
+                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Profile not saved.</i>', 'typ' => 'danger');
                             }
                         }else{
-                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i> ', 'typ' => 'danger');
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i>', 'typ' => 'danger');
                         }
 
                     }else{
-                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
                     }
                     $this->session->set_flashdata('info', $msg);
                     redirect('dashboard/profil');
@@ -136,13 +142,13 @@ class Crud extends CI_Controller {
                             if($cek1 != FALSE){
                                 $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Password has been Update.</i>", 'typ' => 'success');
                             }else{
-                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Password failed saved.</i> ', 'typ' => 'danger');
+                                $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Password failed saved.</i>', 'typ' => 'danger');
                             }
                         }else{
-                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i> ', 'typ' => 'danger');
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Wrong Password.</i>', 'typ' => 'danger');
                         }
                     }else{
-                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
                     }
                     $this->session->set_flashdata('info', $msg);
                     redirect('dashboard/sandi');
@@ -154,6 +160,57 @@ class Crud extends CI_Controller {
             }
             $this->session->set_flashdata('info', $msg);
             redirect('dashboard');
+        }
+    }
+
+    public function usrtodo(){
+        if(!$this->loginm->chksess()||$_SESSION['lvl'] != 0){
+			redirect("login");
+		}else{
+            $this->load->library("safe");
+            $mail = $_SESSION['mail'];
+            $tod = $this->input->get("todo", TRUE);
+            $usr = $this->input->get("usr", TRUE);
+            if(isset($usr)){
+                $tus = $this->safe->dencrypt($usr, $mail);
+                $name = $this->loginm->getail('pengguna', array('surel' => $tus), 'namadepan')." ".$this->loginm->getail('pengguna', array('surel' => $tus), 'namabelakang');
+                $nama = $this->loginm->singkat($name);
+                $dis = $this->loginm->getail('pengguna', array('surel' => $tus), 'block');
+                if($tod == "block"){
+                    $cek = $this->loginm->blockus($tus);
+                    
+                    if($cek != FALSE){
+                        if($dis == 0){
+                            $msg[] = array('ico' => 'ti-lock', 'tit' => "Done!", 'txt' => "<i>User $nama Blocked.</i>", 'typ' => 'success');
+                        }else{
+                            $msg[] = array('ico' => 'ti-unlock', 'tit' => "Done!", 'txt' => "<i>User $nama Unblocked.</i>", 'typ' => 'success');
+                        }
+                    }else{
+                        if($dis == 0){
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => "<i>Cant Blocking user $nama.</i>", 'typ' => 'danger');
+                        }else{
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => "<i>Cant Unblocking user $nama.</i>", 'typ' => 'danger');
+                        }
+                    }
+                }elseif($tod == "delete"){
+                    if($dis){
+                        $cek = $this->loginm->delete('user', array('surel' => $tus));
+                        if($cek != FALSE){
+                            $msg[] = array('ico' => 'ti-trash', 'tit' => "Done!", 'txt' => "<i>User $nama Deleted.</i>", 'typ' => 'success');
+                        }else{
+                            $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => "<i>Cant Delete $nama.</i>", 'typ' => 'danger');
+                        }
+                    }else{
+                        $msg[] = array('ico' => 'ti-na', 'tit' => "Error!", 'txt' => "<i>Cant Delete $nama. Block first!</i>", 'typ' => 'danger');
+                    }
+                }else{
+                    $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
+                }
+            }else{
+                $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
+            }
+            $this->session->set_flashdata('info', $msg);
+            redirect('dashboard/user');
         }
     }
 
@@ -192,7 +249,7 @@ class Crud extends CI_Controller {
                     if($cek){
                         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Homepage has been Update.</i>", 'typ' => 'success');
                     }else{
-                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Homepage failed saved.</i> ', 'typ' => 'danger');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Homepage failed saved.</i>', 'typ' => 'danger');
                     }
 
                     if(!empty($_FILES['images'])){
@@ -226,7 +283,7 @@ class Crud extends CI_Controller {
                                 if($cek1 && $cek2){
                                     $msg[] = array('ico' => 'glyphicon glyphicon-upload', 'tit' => "Done!", 'txt' => "<i>Image $name uploaded.</i>", 'typ' => 'success');
                                 }else{
-                                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>Image Can not Saved.</i> ', 'typ' => 'warning');
+                                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>Image Can not Saved.</i>', 'typ' => 'warning');
                                 }
                             }else{
                                 $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Error!", 'txt' => '<i>'.$this->upload->display_errors()."</i>", 'typ' => 'warning');
@@ -234,7 +291,7 @@ class Crud extends CI_Controller {
                         }
                     }
                 }else{
-                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
                 }
             }elseif($tod == "sign"){
                 $this->form_validation->set_rules('namf', 'Nama Kepala', 'required');
@@ -248,10 +305,10 @@ class Crud extends CI_Controller {
                     if($cek){
                         $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Done!", 'txt' => "<i>Sign has been Update.</i>", 'typ' => 'success');
                     }else{
-                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Sign failed saved.</i> ', 'typ' => 'danger');
+                        $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Error!", 'txt' => '<i>Sign failed saved.</i>', 'typ' => 'danger');
                     }
                 }else{
-                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i> ', 'typ' => 'warning');
+                    $msg[] = array('ico' => 'glyphicon glyphicon-info-sign', 'tit' => "Warning!", 'txt' => '<i>'.preg_replace("/(\n)+/m", '<br>', strip_tags(strip_tags(validation_errors()))).'</i>', 'typ' => 'warning');
                 }
             }else{
                 $msg[] = array('ico' => 'glyphicon glyphicon-remove', 'tit' => "Warning!", 'txt' => '<i>Unknown Parameter.</i>', 'typ' => 'warning');
