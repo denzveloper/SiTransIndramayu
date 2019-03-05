@@ -42,7 +42,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="<?php echo base_url('index.php/dashboard');?>">
                         <i class="ti-panel"></i>
                         <p>Dashboard</p>
@@ -54,7 +54,7 @@
                         <p>Artikel</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<?php echo base_url('index.php/dashboard/data');?>">
                         <i class="ti-files"></i>
                         <p>Data Trans</p>
@@ -117,78 +117,69 @@
         </nav>
 
         <div class="content">
-            <div class="container-fluid">
+		<div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="card">
+                            <div class="header">
+                                <a href='<?php echo base_url('index.php/view/data?')."id=$_GET[id]";?>&todo=view'><button class="btn btn-warning pull-right">Back</button></a>
+                                <h4 class="title">Edit KK</h4>
+                            </div>
                             <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="text-center">
-                                            <img class="align-content" width="40%" src="<?php echo $this->image->show(); ?>" alt="...">
+                                <?php echo form_open("crud/data?todo=$_GET[todo]&id=$_GET[id]&who=$_GET[who]");?>
+
+                                    <h4 class="title">Data Berangkat KK</h4>
+                                    <h5 class="tittle">Data Sebelumnya <?php echo "($user[tahun]) - $user[lok] - $user[kab] - $user[prov]"?></h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Tahun</label>
+                                                <select name="ta" class='ta form-control border-input'>
+                                                <?php if(!empty($reg)){ ?>
+                                                    <option selected="selected" disabled>Select Year</option>
+                                                    <?php foreach($reg as $hit){ ?>
+                                                        <option value="<?php echo $hit; ?>"><?php echo $hit; ?></option>
+                                                <?php }}else{ ?> <option selected="selected" value="Empty" disabled>Tidak Ada Program Transmigrasi</option>
+                                                <?php } ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Nama Anda</p>
-                                            <?php echo $_SESSION['nama'];?>
-                                            <p class="category"><?php echo $_SESSION['mail']; ?></p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Provinsi</label>
+                                                <select name="prov" class="prov form-control border-input">
+                                                <option selected="selected" disabled>-</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <a href="<?php echo base_url('index.php/dashboard/profil');?>"><i class="ti-user"></i> Edit Profil</a>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Kota</label>
+                                                <select name="kab" class="kab form-control border-input">
+                                                <option selected="selected" disabled>-</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Statistik Trans Tahun Ini</h4>
-                                <p class="category">Statistik Trans</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartUser" class="ct-chart ct-perfect-fourth"></div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Lokasi</label>
+                                                <select name="lok" class="lok form-control border-input">
+                                                <option selected="selected" disabled>-</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Total
-                                        <i class="fa fa-circle text-warning"></i> Berangkat
+                                    <div class="text-center">
+                                    <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
                                     </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-time"></i> <?php echo date("H:i D,d-M-Y"); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Statistik Transmigrasi Total</h4>
-                                <p class="category">Jumlah Total</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartLevel" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Total
-                                        <i class="fa fa-circle text-warning"></i> Lulus
-                                        <i class="fa fa-circle text-danger"></i> Berangkat
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-check"></i> Data informasi diatas jumlah total data tanpa pembagian
-                                    </div>
-                                </div>
+								</form>
                             </div>
                         </div>
                     </div>
@@ -207,6 +198,8 @@
 
     </div>
 </div>
+
+
 </body>
 
     <!--   Core JS Files   -->
@@ -216,46 +209,74 @@
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url('assets/js/paper-dashboard.js'); ?>"></script>
 
-
-	<!--  Charts Plugin -->
-	<script src="<?php echo base_url('assets/js/chartist.min.js'); ?>"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>"></script>
-
-    <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-        $.notify({
-            icon: "<?php echo $row['ico']; ?>",
-            title: "<strong><?php echo $row['tit']; ?></strong>",
-            message: "<br><?php echo $row['txt']; ?>"
-
-            },{
-                type: "<?php echo $row['typ']; ?>",
-                timer: 3000
-            });
-
-        });
-	</script>
-    <?php } } ?>
-
     <script>
-
-        new Chartist.Bar('#chartUser', {
-            labels: [<?php echo date("Y"); ?>],
-            series: [<?php echo "[$user[jumlah]], [$user[tym]]"; ?>]
+    $('.ta').change(function() {
+		var option = '<option selected="selected" disabled>-</option>';
+		$(".lok").html(option);
+		$(".kab").html(option);
+		$(".prov").html(option);
+        var tahun = $(this).val();
+        $.ajax({
+            type:'POST',
+            url:'<?php echo base_url("index.php/crud/registerf?todo=update&is=gloc&loc=gpro");?>',
+            data:{'th':tahun},
+            success:function(data){
+                $(".prov").html(data);
+            }
         });
-        
-        new Chartist.Bar('#chartLevel', {
-            labels: [''],
-            series: [<?php echo "[$user[tot]], [$user[ok]], [$user[ber]]"; ?>]
-        }, {
-            horizontalBars: true
+    });
+    $('.prov').change(function() {
+		var option = '<option selected="selected" disabled>-</option>';
+		$(".lok").html(option);
+		$(".kab").html(option);
+        var tahun = $(this).val();
+        var tahun = $('.ta').val();
+        var prov = $(this).val();
+        $.ajax({
+            type:'POST',
+            url:'<?php echo base_url("index.php/crud/registerf?todo=update&is=gloc&loc=gkab");?>',
+            data:{'th':tahun, 'pr':prov},
+            success:function(data){
+                $(".kab").html(data);
+            }
         });
-
+    });
+    $('.kab').change(function() {
+		var option = '<option selected="selected" disabled>-</option>';
+		$(".lok").html(option);
+        var tahun = $('.ta').val();
+        var prov = $('.prov').val();
+        var kab = $(this).val();
+        $.ajax({
+            type:'POST',
+            url:'<?php echo base_url("index.php/crud/registerf?todo=update&is=gloc&loc=gloc");?>',
+            data:{'th':tahun, 'pr':prov, 'ka':kab},
+            success:function(data){
+                $(".lok").html(data);
+            }
+        });
+    });
     </script>
 
+    <!--  Notifications Plugin    -->
+    <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>" type="text/javascript"></script>
+
+    <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $.notify({
+                    icon: "<?php echo $row['ico']; ?>",
+                    title: "<strong><?php echo $row['tit']; ?></strong>",
+                    message: "<br><?php echo $row['txt']; ?>"
+
+                },{
+                    type: "<?php echo $row['typ']; ?>",
+                    timer: 3000
+                });
+
+            });
+        </script>
+    <?php } } ?>
 
 </html>

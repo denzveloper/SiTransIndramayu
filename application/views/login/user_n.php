@@ -25,9 +25,6 @@
     <link href='<?php echo base_url('assets/fonts/muli/font.css');?>' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url('assets/css/themify-icons.css'); ?>" rel="stylesheet">
 
-	<!--  Table     -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/datatables/datatables.min.css'); ?>"/>
-
 </head>
 <body>
 
@@ -63,13 +60,13 @@
                         <p>Data Trans</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="<?php echo base_url('index.php/dashboard/tuju');?>">
                         <i class="ti-map-alt"></i>
                         <p>Data Tujuan</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<?php echo base_url('index.php/dashboard/user');?>">
                         <i class="ti-user"></i>
                         <p>User Manager</p>
@@ -85,7 +82,7 @@
     	</div>
     </div>
 
-	<div class="main-panel">
+    <div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -120,48 +117,83 @@
         </nav>
 
         <div class="content">
-
-            <div class="container-fluid">
+		<div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12 col-sm-12">
                         <div class="card">
                             <div class="header">
-                                <a href="<?php echo base_url('index.php/view/tuju?todo=new');?>"><button class="btn btn-success pull-right">Add Place</button></a>
-                                <h4 class="title">Manager Tujuan Trans</h4>
-                                <p class="category">Mengatur Tujuan Peserta Transmigrasi</p>
+                            <a href="<?php echo base_url('index.php/dashboard/user');?>"><button class="btn btn-warning pull-right">Back</button></a>
+                                <h4 class="title">Pengguna</h4>
                             </div>
+                            <?php if(!$edit){ echo form_open('crud/user?todo=new'); }?>
                             <div class="content">
-                                <table id="tableusr" class="table display table-hover">
-                                <thead>
-                                    <tr class="bg-primary">
-                                        <th scope="col">#</th>
-                                        <th scope="col">Lokasi</th>
-                                        <th scope="col">Kota</th>
-                                        <th scope="col">Provinsi</th>
-                                        <th scope="col">Tahun</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if(!empty($to)){ $x = 1; foreach($to as $hit){
-                                        echo "<tr>";
-                                        echo "<th scope='row'>$x</th>";
-                                        echo "<td>$hit[lok]</td>";
-                                        echo "<td>$hit[kab]</td>";
-                                        echo "<td>$hit[prov]</td>";
-                                        echo "<td>$hit[tahun]</td>";
-                                        echo "<td><a href='".base_url("index.php/view/tuju?id=$hit[id]")."&todo=edit' onclick=\"return confirm('Yakin ingin mengedit $hit[lok]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Edit Data\"><i class=\"fa fa-file\"></i></button></a>
-											</td>";
-                                        echo "</tr>";
-                                        $x++;
-                                    }}else{ echo "<tr><td colspan='5'><h4 class='text-center'>EMPTY</h4></td></tr>"; } ?>
-                                </tbody>
-                                </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Alamat Surel</label>
+                                                <input name="surel" <?php if($edit){ echo "value=\"$user[surel]\""; ?> <?php echo "disabled"; }?> type="email" class="form-control border-input" placeholder="Email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>NIP</label>
+                                                <input name="nip" <?php if($edit){ echo "value=\"$user[nip]\""; ?> <?php echo "disabled";}?> type="text" class="form-control border-input" placeholder="NIP" onkeypress="return number(event);" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Golongan/Pangkat</label>
+                                                <input name="pkg" <?php if($edit){ echo "value=\"$user[pangkatgol]\""; ?> <?php echo "disabled";}?> type="text" class="form-control border-input" placeholder="Pangkat dan Golongan" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jabatan</label>
+                                                <input name="jbt" type="text" <?php if($edit){ echo "value=\"$user[jabatan]\""; ?> <?php echo "disabled"; }?> class="form-control border-input" placeholder="Jabatan" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Awal</label>
+                                                <input name="fnam" <?php if($edit){ echo "value=\"$user[namadepan]\""; ?> <?php echo "disabled";}?> type="text" class="form-control border-input" placeholder="First Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Akhir</label>
+                                                <input name="lnam" type="text" <?php if($edit){ echo "value=\"$user[namabelakang]\""; ?> <?php echo "disabled"; }?> class="form-control border-input" placeholder="Last Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php if(!$edit){ ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label title="Default ; '12345'">Sandi</label>
+                                                <input type="text" name="pass" class="form-control border-input" placeholder="Sandi" value="12345" disabled required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+		<?php if($edit){ echo "</form>";}?>
         </div>
 
 
@@ -176,6 +208,7 @@
     </div>
 </div>
 
+
 </body>
 
     <!--   Core JS Files   -->
@@ -184,21 +217,15 @@
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url('assets/js/paper-dashboard.js'); ?>"></script>
+
+
+	<!--  Charts Plugin -->
+	<script src="<?php echo base_url('assets/js/chartist.min.js'); ?>"></script>
+
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url('assets/js/bootstrap-notify.js'); ?>"></script>
-    
-    <!--  Table Plugin    -->
-    <script type="text/javascript" src="<?php echo base_url('assets/datatables/datatables.min.js'); ?>"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#tableusr').DataTable({ "aLengthMenu": [[7, 10, 21, 30, -1], [7, 10, 21, 30, "Semua"]],
-        "iDisplayLength": 7, "language": {"url": "<?php echo base_url('assets/datatables/Indonesian.json');?>"}
-        });
-        } );
-    </script>
-
-<?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
+    <?php if($this->session->flashdata('info')){ foreach($this->session->flashdata('info') as $row) {?>
     <script type="text/javascript">
         $(document).ready(function(){
 
@@ -215,5 +242,12 @@
         });
 	</script>
     <?php } } ?>
+
+    <script>
+    function number(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+    }
+    </script>
 
 </html>

@@ -126,34 +126,30 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <a href="<?php echo base_url('index.php/dashboard/newuser');?>"><button class="btn btn-success pull-right">Add User</button></a>
-                                <h4 class="title">Manager Data Trans</h4>
-                                <p class="category">Mengatur Data Transmigrasi yang dikirimkan</p>
+                                <a href="<?php echo base_url('index.php/view/artikel?todo=new');?>"><button class="btn btn-success pull-right">Tambah Artikel</button></a>
+                                <h4 class="title">Artikel</h4>
+                                <p class="category">Artikel Untuk Berita</p>
                             </div>
                             <div class="content">
                                 <table id="tableusr" class="table display table-hover">
                                 <thead>
                                     <tr class="bg-primary">
                                         <th scope="col">#</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Asal</th>
-                                        <th scope="col">Tujuan</th>
+                                        <th scope="col">Judul</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Pratinjau</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if(!empty($user)){ $x = 1; foreach($user as $hit){
+                                    <?php if(!empty($artikel)){ $x = 1; foreach($artikel as $hit){
                                         echo "<tr>";
                                         echo "<th scope='row'>$x</th>";
-                                        echo "<td>$hit[surel]</td>";
-                                        echo "<td>$hit[nama]</td>";
-                                        echo "<td>$hit[level]</td>";
-                                        echo "<td>
-												<a href='$hit[link]&todo=block' onclick=\"return confirm('Yakin ingin $hit[stat] $hit[nama]?')\"><button class=\"btn btn-sm btn-warning btn-icon\" title=\"$hit[stat]\">$hit[text]</button></a>";
-										if($hit['block']){
-											echo "&nbsp;&middot;&nbsp;<a href='$hit[link]&todo=delete' onclick=\"return confirm('Yahkin ingin menghapus $hit[nama]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Delete User\"><i class=\"fa fa-trash\"></i></button></a>
-											</td>";
-										}
+                                        echo "<td>$hit[judul]</td>";
+                                        echo "<td>$hit[timedate]</td>";
+                                        echo "<td>$hit[artikel]</td>";
+                                        echo "<td><a href='".base_url("index.php/view/artikel?id=$hit[id]")."&todo=edit' onclick=\"return confirm('Yakin ingin mengedit $hit[judul]?')\"><button class=\"btn btn-sm btn-success btn-icon\" title=\"Edit Artikel\"><i class=\"fa fa-file\"></i></button></a>
+                                        </td>";
                                         echo "</tr>";
                                         $x++;
                                     }}else{ echo "<tr><td colspan='5'><h4 class='text-center'>EMPTY</h4></td></tr>"; } ?>

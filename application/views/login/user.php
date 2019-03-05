@@ -126,7 +126,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-							<a href="<?php echo base_url('index.php/dashboard/newuser');?>"><button class="btn btn-success pull-right">Add User</button></a>
+							<a href="<?php echo base_url('index.php/view/user?todo=new');?>"><button class="btn btn-success pull-right">Add User</button></a>
                                 <h4 class="title">Manager User</h4>
                                 <p class="category">Mengatur User yang ada</p>
                             </div>
@@ -135,9 +135,9 @@
                                 <thead>
                                     <tr class="bg-primary">
                                         <th scope="col">#</th>
-                                        <th scope="col">Surel</th>
+                                        <th scope="col">NIP</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">Level</th>
+                                        <th scope="col">Jabatan</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -145,15 +145,17 @@
                                     <?php if(!empty($user)){ $x = 1; foreach($user as $hit){
                                         echo "<tr>";
                                         echo "<th scope='row'>$x</th>";
-                                        echo "<td>$hit[surel]</td>";
+                                        echo "<td>$hit[nip]</td>";
                                         echo "<td>$hit[nama]</td>";
-                                        echo "<td>$hit[level]</td>";
-                                        echo "<td>
-												<a href='$hit[link]&todo=block' onclick=\"return confirm('Yakin ingin $hit[stat] $hit[nama]?')\"><button class=\"btn btn-sm btn-warning btn-icon\" title=\"$hit[stat]\">$hit[text]</button></a>";
-										if($hit['block']){
-											echo "&nbsp;&middot;&nbsp;<a href='$hit[link]&todo=delete' onclick=\"return confirm('Yahkin ingin menghapus $hit[nama]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Delete User\"><i class=\"fa fa-trash\"></i></button></a>
+                                        echo "<td>$hit[jbt]</td>";
+                                        echo "<td>";
+                                        if($_SESSION['lvl']==0){
+										    echo "<a href='$hit[link]&todo=block' onclick=\"return confirm('Yakin ingin $hit[stat] $hit[nama]?')\"><button class=\"btn btn-sm btn-warning btn-icon\" title=\"$hit[stat]\">$hit[text]</button></a>&nbsp;&middot;&nbsp;";
+										}if($hit['block']&&$_SESSION['lvl']==0){
+											echo "<a href='$hit[link]&todo=delete' onclick=\"return confirm('Yahkin ingin menghapus $hit[nama]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Delete User\"><i class=\"fa fa-trash\"></i></button></a>&nbsp;&middot;&nbsp;";
+                                        }
+                                        echo "<a href='".base_url("index.php/view/user?usr=$hit[mail]")."&todo=view'><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Detail User\"><i class=\"fa fa-info\"></i></button></a>
 											</td>";
-										}
                                         echo "</tr>";
                                         $x++;
                                     }}else{ echo "<tr><td colspan='5'><h4 class='text-center'>EMPTY</h4></td></tr>"; } ?>

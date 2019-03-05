@@ -5,6 +5,9 @@ class Loginm extends CI_Model{
     
     public function __construct(){
         date_default_timezone_set("Asia/Bangkok");
+        setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US.8859-1', 'en_US', 'American', 'ENG', 'English');
+
+        //error_reporting(0);
     }
 
     //You Know lah ini login
@@ -227,10 +230,11 @@ class Loginm extends CI_Model{
     }
 
     //Get any data?
-    function getean($f1, $f2=FALSE){
+    function getean($f1, $f2=FALSE, $f3=FALSE){
         $this->db->select('*');
         $this->db->from($f1);
         if($f2 != FALSE) $this->db->where($f2);
+        if($f3 != FALSE) $this->db->order_by($f3, 'DESC');
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return FALSE;
@@ -288,16 +292,18 @@ class Loginm extends CI_Model{
 
     function getusrall(){
         $this->load->library("safe");
-        $q = $this->db->from('pengguna')->where('level >', '0')->get();
-        if($q->num_rows() != 0){
-            foreach($q->result_array() as $row){
+        $q = $this->getean('pengguna', 'level > 0');
+        if(!empty($q)){
+            foreach($q as $row){
                 $n = $row['namadepan']; 
                 $n .= ' '.$row['namabelakang'];
                 $row['nama'] = $this->singkat($n, 20);
+                $row['jbt'] = $this->singkat($row['jabatan'], 20);
                 $row['stat'] = "Blokir";
                 $row['text'] = "<i class=\"fa fa-lock\"></i>";
                 if($row['block'] == 1){ $row['stat'] = "Unblock"; $row['text'] = "<i class=\"fa fa-unlock\"></i>";}
                 $row['link'] = base_url('index.php/crud/usrtodo?usr=').$this->safe->encrypt($row['surel'], $_SESSION['mail']);
+                $row['mail'] = $this->safe->encrypt($row['surel'], $_SESSION['mail']);
                 $data[] = $row;
             }
             return $data;
@@ -306,7 +312,6 @@ class Loginm extends CI_Model{
         }
     }
 
-    //Blocking User
     function blockus($f1){
         $dis = $this->getail('pengguna', array('surel' => $f1), 'block');
         
@@ -322,5 +327,52 @@ class Loginm extends CI_Model{
             return $query;
         }
     }
-    
+
+    function gettrans(){
+        $this->load->library("safe");
+        $mail = $_SESSION['mail'];
+        //$q = $this->getean('data_kk', "surel_petugas = '$mail' OR surel_petugas IS NULL");
+        $q = $this->getean('data_kk');
+        if(!empty($q)){
+            foreach($q as $row){
+                $row['dekk'] = $this->singkat($row['desa'], 20);
+                if($row['berangkat']) $row['color'] = "success";
+                elseif(isset($row['surel_petugas'])) $row['color'] = "warning";
+                else $row['color'] = "danger";
+                $row['tuju'] = $this->getail('tujuan', array('id' => $row['id_tuju']), 'lok');
+                $row['link'] = base_url('index.php/view/data?id=').$this->safe->encrypt($row['id'], $mail);
+                $data[] = $row;
+            }
+            return $data;
+        }else{
+            return FALSE;
+        }
+    }
+
+    function getart(){
+        $this->load->library("safe");
+        $mail = $_SESSION['mail'];
+        $q = $this->getean('kabar', array('pengguna' => $_SESSION['mail']), 'timedate');
+        if(!empty($q)){
+            foreach($q as $row){
+                $row['artikel'] = $this->singkat($row['konten'], 200);
+                $data[] = $row;
+            }
+            return $data;
+        }else{
+            return FALSE;
+        }
+    }
+
+    function count(){
+        $y = date('Y');
+        $q1 = $this->db->from('data_kk')->get()->num_rows();
+        $q2 = $this->db->from('data_kk')->like('date', $y, 'after')->where('berangkat', '1')->get()->num_rows();
+
+        $a1 = $this->db->from('data_kk')->get()->num_rows();
+        $a2 = $this->db->from('data_kk')->where('`surel_petugas` IS NOT NULL')->get()->num_rows();
+        $a3 = $this->db->from('data_kk')->where('berangkat', '1')->get()->num_rows();
+
+        return array('jumlah' => $q1, 'tym' => $q2, 'tot' => $a1, 'ok' => $a2, 'ber' => $a3);
+    }
 }

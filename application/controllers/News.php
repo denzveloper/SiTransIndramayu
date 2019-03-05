@@ -24,7 +24,7 @@ class News extends CI_Controller {
         $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
         $config['next_tag_open'] = '<li>';
         $config['next_tag_close'] = '</li>';
-        $from = $this->uri->segment(3);
+        $from = ($this->uri->segment(3)) ? ($this->uri->segment(3) * $config["per_page"]) - $config["per_page"] : 0;
         $this->pagination->initialize($config);
         $data['news'] = $this->datam->data($config['per_page'], $from);
 		$this->load->view('homes/news', $data);

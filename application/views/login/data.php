@@ -141,18 +141,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if(!empty($user)){ $x = 1; foreach($user as $hit){
-                                        echo "<tr>";
-                                        echo "<th scope='row'>$x</th>";
-                                        echo "<td>$hit[surel]</td>";
-                                        echo "<td>$hit[nama]</td>";
-                                        echo "<td>$hit[level]</td>";
-                                        echo "<td>
-												<a href='$hit[link]&todo=block' onclick=\"return confirm('Yakin ingin $hit[stat] $hit[nama]?')\"><button class=\"btn btn-sm btn-warning btn-icon\" title=\"$hit[stat]\">$hit[text]</button></a>";
-										if($hit['block']){
-											echo "&nbsp;&middot;&nbsp;<a href='$hit[link]&todo=delete' onclick=\"return confirm('Yahkin ingin menghapus $hit[nama]?')\"><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Delete User\"><i class=\"fa fa-trash\"></i></button></a>
-											</td>";
-										}
+                                    <?php if(!empty($list)){ $x = 1; foreach($list as $hit){
+                                        echo "<tr class='$hit[color]'>";
+                                        echo "<td>$x</td>";
+                                        echo "<td>$hit[namakk]</td>";
+                                        echo "<td>$hit[dekk]</td>";
+                                        echo "<td>$hit[tuju]</td>";
+                                        echo "<td><a href='$hit[link]&todo=view'><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Detail User\"><i class=\"fa fa-info\"></i></button></a>";
                                         echo "</tr>";
                                         $x++;
                                     }}else{ echo "<tr><td colspan='5'><h4 class='text-center'>EMPTY</h4></td></tr>"; } ?>

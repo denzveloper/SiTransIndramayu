@@ -15,7 +15,8 @@ class Dashboard extends CI_Controller {
     	if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-			$this->load->view('login/dashboard');
+            $data['user'] = $this->loginm->count();
+			$this->load->view('login/dashboard', $data);
 		}
     }
     
@@ -23,7 +24,8 @@ class Dashboard extends CI_Controller {
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-			$this->load->view('login/artikel');
+            $data['artikel'] = $this->loginm->getart();
+			$this->load->view('login/artikel', $data);
 		}
     }
 
@@ -31,7 +33,8 @@ class Dashboard extends CI_Controller {
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-			$this->load->view('login/data');
+            $data['list'] = $this->loginm->gettrans();
+			$this->load->view('login/data', $data);
 		}
     }
 
@@ -39,12 +42,13 @@ class Dashboard extends CI_Controller {
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-			$this->load->view('login/tuju');
+            $data['to'] = $this->loginm->getean('tujuan');
+			$this->load->view('login/tuju', $data);
 		}
     }
 
     public function user(){
-        if(!$this->loginm->chksess()||$_SESSION['lvl']!=0){
+        if(!$this->loginm->chksess()){
 			    redirect("login");
 		}else{
             $data['user'] = $this->loginm->getusrall();
@@ -84,20 +88,22 @@ class Dashboard extends CI_Controller {
         if(!$this->loginm->chksess()) {
             redirect("login");
         }else{
-            $this->load->model('loginm');
+            $this->load->library('pdf');
+            $mail = $_SESSION['mail'];
             $tod = $this->input->get("todo", TRUE);
-
+            if(!isset($tod))redirect("view/data");
             if($tod == "family"){
-                $this->load->library('pdf');
-                $who = $this->input->get("who", TRUE);
+                $this->load->library('safe');
+                $who = $this->input->get("id", TRUE);
+                $who = $this->safe->dencrypt($who, $mail);
                 $data['dok'] = $this->loginm->getean('data_kk', array('id' => $who));
-                $this->load->view("login/data/cetakf",$data);
+                
+                $this->load->view("login/data/cetakf", $data);
             }elseif($tod == "select"){
-                $this->load->library('pdf');
                 //Belum jadi
                 //$this->load->view("login/data/cetaks",$data);
             }else{
-
+                redirect("view/data");
             }
         }
     }

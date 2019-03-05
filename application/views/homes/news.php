@@ -1,42 +1,87 @@
 <!DOCTYPE html>
-<html>
-	<meta charset="utf-8" />
+<html lang="en">
+  <head>
+  	<meta charset="utf-8" />
     <link rel="icon" type="image/png" sizes="96x96" href="<?php echo $this->image->show(); ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<head>
-		<title>Berita-In Transmigrasi</title>
-	</head>
-	<body>
-	<?php //$this->uri->segment('3'); ?>
-	<h1>MANPOWER AND TRANSMIGRATION REGION INDRAMAYU</h1>
-    <a href="<?php echo base_url('index.php/login'); ?>">Login Admin</a>
-    <br>
-    <a href="<?php echo base_url('index.php/home'); ?>">Home</a>
-    <a href="<?php echo base_url('index.php/register'); ?>">Register</a>
-    <a href="#">News</a>
-    <br>
-	<h2>Berita Ter-Kini</h2>
-		<table border="1">
-			<tr>
-				<th>Judul</th>
-				<th>Tanggal</th>
-				<th>Konten</th>	
-				<th>Image</th>	
-			</tr>
-			<?php
-			if($news){foreach($news as $u){ 
-			?>
-			<tr>
-				<td><?php echo $u['judul']; ?></td>
-				<td><?php echo $u['timedate']; ?></td>
-				<td><?php echo $u['konten']; ?></td>
-				<td><img src="<?php echo $this->image->show($u['image']); ?>"></td>
-			</tr>
-			<?php }}?>
-		</table>
-		<br/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>News Transmigrasi</title>
+
+    <!-- Bootstrap core CSS     -->
+    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<a class="navbar-brand" href="#">Si TRANS</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="<?php echo base_url('index.php'); ?>">Home</a></li>
+				<li><a href="<?php echo base_url('index.php/register');?>">Register</a></li>
+				<li class="active"><a href="#">News</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="navbar-left"><a href="<?php echo base_url('index.php/login'); ?>">Login</a></li>
+			</ul>
+		</div>
+		</nav>
+
+      </div>
+    </div>
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+	<?php
+	if($news){foreach($news as $u){ 
+	?>
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="featurette-image img-responsive center-block" src="<?php echo $this->image->show($u['image']); ?>" alt="...">
+          <h3><?php echo $u['judul']; ?></h3>
+          <p><i><?php echo $u['timedate']; ?></i></p>
+        </div>
+        <div class="col-lg-8">
+          <p><?php echo $u['konten']; ?></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+	  <hr>
+	  <?php }}?>
+
+	  <div class="row">
+        <div class="col-lg-4">
 		<?php 
-		echo $this->pagination->create_links();
+			echo $this->pagination->create_links();
 		?>
-	</body>
+		</div>
+	</div>
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2018 - <script>document.write(new Date().getFullYear())</script></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--   Core JS Files   -->
+    <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+  </body>
 </html>

@@ -152,7 +152,9 @@ class Register extends CI_Controller {
       $this->session->unset_tempdata('jet');
       $this->session->unset_tempdata('kepala');
       $this->session->unset_tempdata('tanggungan');
-      
+
+      $msg[] = array('ico' => 'glyphicon glyphicon-floppy-saved', 'tit' => "Selesai!", 'txt' => "<i>Selesai. Tunggu kedatangan kami untuk verifikasi data.</i>", 'typ' => 'info');
+      $this->session->set_flashdata('info', $msg);
       redirect('register');
     }
 }

@@ -11,7 +11,7 @@ if($dok != FALSE){foreach($dok as $dok){
 }
 
 //Load Model PDF
-$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+$pdf = new Pdf('P', 'mm', 'Legal', true, 'UTF-8', false);
 $pdf->SetTitle("Kartu Seleksi Transmigran Tahun $thn Milik $nam");
 $pdf->SetFont('times', '', 12, '', 'false');
 $pdf->SetHeaderMargin(30);
