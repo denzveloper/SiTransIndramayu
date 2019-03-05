@@ -39,12 +39,13 @@
                             <div class="form-group">
                                 <input type="password" name="pass" class="form-control" placeholder="Password">
                         </div>
-
+                        <!--
                             <div class="form-group">
                                 <label>Lupa Sandi? 
                                 <a href="<?php echo base_url('index.php/forget'); ?>">Disini!</a>
                                 </label>
                             </div>
+                            -->
                                 <button type="submit" class="btn btn-primary btn-flat m-b-40 m-t-40">Masuk</button>
                     </form>
                 </div>
