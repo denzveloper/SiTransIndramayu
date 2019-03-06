@@ -24,6 +24,7 @@ class Loginm extends CI_Model{
         if ($query->num_rows() == 0) {
             return FALSE;
         } else {
+            $this->updt('pengguna', array('surel' => $f1), array('forgot' => 0));
             return $query->result();
         }
     }

@@ -231,7 +231,7 @@
                         <a href='<?php echo base_url('index.php/crud/data?')."id=$idk";?>&todo=go&who=kk' onclick="return confirm('Yakin ingin tandai berangkat?')"><button class="btn btn-sm btn-info btn-icon" title="Telah berangkat"><i class="fa fa-plane"></i> Tandai Berangkat</button>&nbsp;</a>
                         &nbsp;&middot;&nbsp;
                         <?php } ?>
-                        <a href='<?php echo base_url('index.php/dashboard/print?')."id=$idk";?>&todo=family'><button class="btn btn-sm btn-success btn-icon" title="Cetak Data"><i class="fa fa-print"></i> Cetak</button>&nbsp;</a>
+                        <a href='<?php echo base_url('index.php/dashboard/print?')."id=$idk";?>&todo=family' target="_blank"><button class="btn btn-sm btn-success btn-icon" title="Cetak Data"><i class="fa fa-print"></i> Cetak</button>&nbsp;</a>
                         <?php } ?>
                     </div>
                 </div>

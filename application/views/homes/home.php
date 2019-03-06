@@ -14,9 +14,7 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
-      <div class="container">
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
 			<a class="navbar-brand" href="#">Si TRANS</a>
@@ -31,9 +29,6 @@
 			</ul>
 		</div>
 		</nav>
-
-      </div>
-    </div>
 
 
     <!-- Carousel
@@ -83,21 +78,20 @@
       </div><!-- /.row -->
 	</div>
 
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 - <script>document.write(new Date().getFullYear())</script></p>
-      </footer>
+  </div><!-- /.container -->
 
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2018 - <script>document.write(new Date().getFullYear())</script></p>
+      </div>
+    </footer>
+  </body>
+      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
-  </body>
 </html>

@@ -14,8 +14,6 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
-      <div class="container">
 		<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -31,9 +29,6 @@
 			</ul>
 		</div>
 		</nav>
-
-      </div>
-    </div>
 
 
     <!-- Marketing messaging and featurettes
@@ -60,28 +55,27 @@
 	  <?php }}?>
 
 	  <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-12 text-center">
 		<?php 
 			echo $this->pagination->create_links();
 		?>
 		</div>
 	</div>
 
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 - <script>document.write(new Date().getFullYear())</script></p>
-      </footer>
+  </div><!-- /.container -->
 
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2018 - <script>document.write(new Date().getFullYear())</script></p>
+      </div>
+    </footer>
+  </body>
+      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/jquery-1.10.2.js'); ?>" type="text/javascript"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
-  </body>
 </html>

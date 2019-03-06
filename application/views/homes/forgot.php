@@ -32,17 +32,16 @@
                         <img class="align-content" width="40%" src="<?php echo $this->image->show(); ?>" alt="...">
                 </div>
                 <div class="login-form">
-                    <?php echo form_open("forget/redeem?kode=$_GET[kode]");?>
+                    <?php echo form_open('forget/redeem');?>
                         <div class="form-group">
-                            <input type="kode" name="kode" class="form-control" placeholder="Masukkan Kode Acak">
+                            <input type="email" name="mail" class="form-control" placeholder="Email">
                         </div>
-                        <div class="form-group">
-                            <input type="password" name="pas" class="form-control" placeholder="Kata Sandi Baru">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="pass" class="form-control" placeholder="Ulang Sandi Baru">
-                        </div>
-                            <button type="submit" class="btn btn-primary btn-flat m-b-40 m-t-40">Save</button>
+                            <div class="form-group">
+                                <label>Sudah Punya Akun? 
+                                <a href="<?php echo base_url('index.php/login'); ?>">Disini!</a>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-flat m-b-40 m-t-40">Send Mail</button>
                     </form>
                 </div>
             </div>

@@ -6,6 +6,7 @@ if($dok != FALSE){foreach($dok as $dok){
     $nam = $dok['namakk'];
     $doa = $this->loginm->getean('data_tanggung', array('id_kk' => $dok['id']));
     $dot = $this->loginm->getean('tujuan', array('id' => $dok['id_tuju']))[0];
+    $kep = $this->loginm->getean('kepaladinas')[0];
 }}else{
     echo "<br><h1 align='center'>-Was Gone!</h1><br><h4 align='center' style='color: white;'><i>Пролетарии всех стран, соединяйтесь!</i></h4>";
     exit;
@@ -199,7 +200,7 @@ $html .= '
 </tr>
 <tr>
     <td align="center">&nbsp;</td>
-    <td align="center">...................................................</td>
+    <td align="center"><b>'.$kep['nama_kepala'].'</b><br>'.$kep['nik'].'</td>
 </tr>
 </table>
 ';
