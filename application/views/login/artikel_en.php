@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-fill btn-wd pull-right">Simpan</button>
+                                    <button type="submit" class="btn btn-info btn-fill btn-wd ?<?php if($edit){echo 'pull-right';}?>">Simpan</button>
 								    </form>
                                     
                                     <?php if($edit){

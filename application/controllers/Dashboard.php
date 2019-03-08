@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller {
         if(!$this->loginm->chksess()){
 			redirect("login");
 		}else{
-            $data['to'] = $this->loginm->getean('tujuan');
+            $data['to'] = $this->loginm->getean('tujuan', FALSE, 'id');
 			$this->load->view('login/tuju', $data);
 		}
     }

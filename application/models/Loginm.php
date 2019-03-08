@@ -333,7 +333,7 @@ class Loginm extends CI_Model{
         $this->load->library("safe");
         $mail = $_SESSION['mail'];
         //$q = $this->getean('data_kk', "surel_petugas = '$mail' OR surel_petugas IS NULL");
-        $q = $this->getean('data_kk');
+        $q = $this->getean('data_kk', FALSE, "date");
         if(!empty($q)){
             foreach($q as $row){
                 $row['dekk'] = $this->singkat($row['desa'], 20);

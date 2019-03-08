@@ -181,8 +181,8 @@
                                 <div class="footer">
                                     <div class="chart-legend">
                                         <i class="fa fa-circle text-info"></i> Total
-                                        <i class="fa fa-circle text-warning"></i> Lulus
-                                        <i class="fa fa-circle text-danger"></i> Berangkat
+                                        <i class="fa fa-circle text-warning"></i> Berangkat
+                                        <i class="fa fa-circle text-danger"></i> Lulus
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -250,9 +250,7 @@
         
         new Chartist.Bar('#chartLevel', {
             labels: [''],
-            series: [<?php echo "[$user[tot]], [$user[ok]], [$user[ber]]"; ?>]
-        }, {
-            horizontalBars: true
+            series: [<?php echo "[$user[tot]], [$user[ber]], [$user[ok]]"; ?>]
         });
 
     </script>

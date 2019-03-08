@@ -130,6 +130,12 @@
                                 <p class="category">Mengatur Data Transmigrasi yang dikirimkan</p>
                             </div>
                             <div class="content">
+                                <div class="chart-legend">
+                                    Info Warna: 
+                                    <i class="fa fa-circle text-success"></i> Sudah Berangkat
+                                    <i class="fa fa-circle text-warning"></i> Belum Berangkat
+                                    <i class="fa fa-circle text-danger"></i> Belum di verifikasi
+                                </div>
                                 <table id="tableusr" class="table display table-hover">
                                 <thead>
                                     <tr class="bg-primary">
@@ -137,6 +143,7 @@
                                         <th scope="col">Nama</th>
                                         <th scope="col">Asal</th>
                                         <th scope="col">Tujuan</th>
+                                        <th scope="col">Waktu kirim</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -147,6 +154,7 @@
                                         echo "<td>$hit[namakk]</td>";
                                         echo "<td>$hit[dekk]</td>";
                                         echo "<td>$hit[tuju]</td>";
+                                        echo "<td>$hit[date]</td>";
                                         echo "<td><a href='$hit[link]&todo=view'><button class=\"btn btn-sm btn-danger btn-icon\" title=\"Detail User\"><i class=\"fa fa-info\"></i></button></a>";
                                         echo "</tr>";
                                         $x++;

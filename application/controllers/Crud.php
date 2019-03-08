@@ -344,7 +344,7 @@ class Crud extends CI_Controller {
                     $config['allowed_types'] = 'jpeg|png|gif'; //Pitcure Only
                     $config['max_size'] = '2048'; //2MB
                     $config['encrypt_name'] = TRUE;
-                    $inm = null;
+                    $inm = 'default.png';
                     $this->load->library('upload', $config); //load library upload
                     if ($this->upload->do_upload('foto')){
                         $inm = $this->upload->data('file_name');

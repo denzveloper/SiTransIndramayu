@@ -151,7 +151,7 @@
                                                 <img src="<?php echo $this->image->show($img['img']);?>" alt="..." class="img-responsive img-rounded center-block">
                                             </div>
                                             <div class="col-xs-6 text-right">
-                                                <a href="<?php echo base_url('index.php/crud/home').'?id='.$img['id']."&todo=delete";?>"><button class="btn btn-sm btn-danger btn-icon"><i class="fa fa-trash"></i> Delete</button></a>
+                                                <a href="<?php echo base_url('index.php/crud/home').'?id='.$img['id']."&todo=delete";?>" class="btn btn-sm btn-danger btn-icon"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
                                         </div>
                                     </li>
